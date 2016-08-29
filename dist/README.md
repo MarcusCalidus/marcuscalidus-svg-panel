@@ -1,0 +1,1 @@
+/Users/marcowarm/Development/Birkenstock/panda/svg_panel/package.json

@@ -1,0 +1,21 @@
+{
+  "type": "panel",
+  "name": "SVG",
+  "id": "grafana-svg-panel",
+
+  "info": {
+    "description": "SVG panel for grafana",
+    "author": {
+      "name": "Marco.Warm@birkenstock.com",
+      "url": "https://jira.birkenstock.com/bitbucket/projects/PANDA/"
+    },
+    "keywords": ["svg", "panel"],
+    "version": "1.1.1",
+    "updated": "2016-08-29“
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}

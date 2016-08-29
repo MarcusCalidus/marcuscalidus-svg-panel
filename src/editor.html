@@ -1,0 +1,19 @@
+<div class="editor-row">
+		<h5 class="section-heading">JavaScript Code</h5>
+		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea>
+</div>
+
+<div class="editor-row">
+		<h5 class="section-heading">SVG data</h5>
+		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.svg_data" ng-change="ctrl.render();"></textarea>
+</div>
+
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">Demos</h5>
+		<div class="gf-form">
+			<button class="btn btn-inverse gf-form-btn width-8" ng-click="ctrl.demos.clock()">Clock Demo</button>			
+		</div>
+	</div>	
+</div>
+
