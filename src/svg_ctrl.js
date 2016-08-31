@@ -92,6 +92,20 @@ export class SVGCtrl extends MetricsPanelCtrl {
       };
     });
   }
+  
+  fixSVGReferences(svgnode) {
+    var xPathExpr = "//*/@*[starts-with(.,'url(#') or starts-with(.,concat('url(',\"'\",'#'))]";
+    var result=document.evaluate(xPathExpr, svgnode).iterateNext();
+
+	while (result)
+  	{
+  	  var s = result.value;
+  	  s = s.slice(0, s.indexOf('#')) + window.location.href + s.slice(s.indexOf('#'), s.length);
+  	  result.value = s;
+  	  
+      result=document.evaluate(xPathExpr, svgnode).iterateNext();
+    }
+  }
 
   onDataReceived(dataList) {
     this.series = dataList.map(this.seriesHandler.bind(this));

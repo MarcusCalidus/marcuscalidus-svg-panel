@@ -173,6 +173,20 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             });
           }
         }, {
+          key: 'fixSVGReferences',
+          value: function fixSVGReferences(svgnode) {
+            var xPathExpr = "//*/@*[starts-with(.,'url(#') or starts-with(.,concat('url(',\"'\",'#'))]";
+            var result = document.evaluate(xPathExpr, svgnode).iterateNext();
+
+            while (result) {
+              var s = result.value;
+              s = s.slice(0, s.indexOf('#')) + window.location.href + s.slice(s.indexOf('#'), s.length);
+              result.value = s;
+
+              result = document.evaluate(xPathExpr, svgnode).iterateNext();
+            }
+          }
+        }, {
           key: 'onDataReceived',
           value: function onDataReceived(dataList) {
             this.series = dataList.map(this.seriesHandler.bind(this));

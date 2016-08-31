@@ -39,11 +39,12 @@ export default function link(scope, elem, attrs, ctrl) {
 
   function addSVG() {        
     var xml = jQuery.parseXML(panel.svg_data);
-
+      
     svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
     svgelem.html(xml.documentElement.children); 
     svgnode=svgelem.get(0);
-  }
+    ctrl.fixSVGReferences(svgnode);
+  } 
 
   function resizePlotCanvas() {
     var width = elem.width();

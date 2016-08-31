@@ -46,6 +46,7 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
       svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
       svgelem.html(xml.documentElement.children);
       svgnode = svgelem.get(0);
+      ctrl.fixSVGReferences(svgnode);
     }
 
     function resizePlotCanvas() {
