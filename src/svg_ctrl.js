@@ -4,6 +4,7 @@ import kbn from 'app/core/utils/kbn';
 import TimeSeries from 'app/core/time_series';
 import rendering from './rendering';
 import {SVGDemos} from './demos';
+import {Snap} from 'https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js';
 
 export class SVGCtrl extends MetricsPanelCtrl {
 
@@ -19,13 +20,13 @@ export class SVGCtrl extends MetricsPanelCtrl {
       targets: [{}],
       cacheTimeout: null,
       nullPointMode: 'connected',
-      legendType: 'Under graph',
       aliasColors: {},
       format: 'short',
       valueName: 'current',
       
-      svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 1000 1000" ></svg>',
-      js_code: '//paste body of handleMetric function here\n\n//Parameters:\n//ctrl - instance of current svg-panel\n//elem - SVG panel html element'
+      svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
+      js_code: '//paste body of handleMetric function here\n\n//Parameters:\n//ctrl - instance of current svg-panel\n//elem - SVG panel html element',
+      js_init_code: '//this code is executed right after the first initialization of the SVG'
     };
 
     _.defaults(this.panel, panelDefaults);
@@ -37,6 +38,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     
     this.demos = new SVGDemos(this);
+    this.initialized = 0;
   }
 
   onInitEditMode() {
@@ -64,13 +66,18 @@ export class SVGCtrl extends MetricsPanelCtrl {
     this.panel.handleMetric = Function ('ctrl', 'elem', this.panel.js_code);
   }
   
-  resetSVGData() {
-  	this.panel.svgInitialized = false;
+  setInitFunction() {
+	this.initialized = 0;
+    this.panel.doInit = Function ('ctrl', 'elem', this.panel.js_init_code);
   }
 
-  onRender() {
+  onRender() {    
     if (!this.panel.handleMetric) {
       this.setHandleMetricFunction();
+    }
+    
+    if (!this.panel.doInit) {
+      this.setInitFunction();
     }
     
     this.data = this.parseSeries(this.series);
@@ -91,6 +98,10 @@ export class SVGCtrl extends MetricsPanelCtrl {
     this.data = this.parseSeries(this.series);
     this.render(this.data);
   }
+
+  resetSVG() {
+	this.initialized = 0;
+  }  
 
   seriesHandler(seriesData) {
     var series = new TimeSeries({

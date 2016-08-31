@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', 'https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js'], function (_export, _context) {
   "use strict";
 
-  var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, _createClass, SVGCtrl;
+  var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, _createClass, SVGCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -48,6 +48,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
       rendering = _rendering.default;
     }, function (_demos) {
       SVGDemos = _demos.SVGDemos;
+    }, function (_httpsCdnjsCloudflareComAjaxLibsSnapSvg041SnapSvgMinJs) {
+      Snap = _httpsCdnjsCloudflareComAjaxLibsSnapSvg041SnapSvgMinJs.Snap;
     }],
     execute: function () {
       _createClass = function () {
@@ -86,13 +88,13 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             targets: [{}],
             cacheTimeout: null,
             nullPointMode: 'connected',
-            legendType: 'Under graph',
             aliasColors: {},
             format: 'short',
             valueName: 'current',
 
-            svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 1000 1000" ></svg>',
-            js_code: '//paste body of handleMetric function here\n\n//Parameters:\n//ctrl - instance of current svg-panel\n//elem - SVG panel html element'
+            svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
+            js_code: '//paste body of handleMetric function here\n\n//Parameters:\n//ctrl - instance of current svg-panel\n//elem - SVG panel html element',
+            js_init_code: '//this code is executed right after the first initialization of the SVG'
           };
 
           _.defaults(_this.panel, panelDefaults);
@@ -104,6 +106,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
           _this.events.on('init-edit-mode', _this.onInitEditMode.bind(_this));
 
           _this.demos = new SVGDemos(_this);
+          _this.initialized = 0;
           return _this;
         }
 
@@ -138,15 +141,20 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             this.panel.handleMetric = Function('ctrl', 'elem', this.panel.js_code);
           }
         }, {
-          key: 'resetSVGData',
-          value: function resetSVGData() {
-            this.panel.svgInitialized = false;
+          key: 'setInitFunction',
+          value: function setInitFunction() {
+            this.initialized = 0;
+            this.panel.doInit = Function('ctrl', 'elem', this.panel.js_init_code);
           }
         }, {
           key: 'onRender',
           value: function onRender() {
             if (!this.panel.handleMetric) {
               this.setHandleMetricFunction();
+            }
+
+            if (!this.panel.doInit) {
+              this.setInitFunction();
             }
 
             this.data = this.parseSeries(this.series);
@@ -170,6 +178,11 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             this.series = dataList.map(this.seriesHandler.bind(this));
             this.data = this.parseSeries(this.series);
             this.render(this.data);
+          }
+        }, {
+          key: 'resetSVG',
+          value: function resetSVG() {
+            this.initialized = 0;
           }
         }, {
           key: 'seriesHandler',

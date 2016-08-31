@@ -1,11 +1,16 @@
 <div class="editor-row">
-		<h5 class="section-heading">JavaScript Code</h5>
+		<h5 class="section-heading">JavaScript Code: onHandleMetric(ctrl, elem)</h5>
 		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea>
 </div>
 
 <div class="editor-row">
+		<h5 class="section-heading">JavaScript Code: onInit(ctrl, elem)</h5>
+		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_init_code" ng-change="ctrl.setInitFunction(); ctrl.render();"></textarea>
+</div>
+
+<div class="editor-row">
 		<h5 class="section-heading">SVG data</h5>
-		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.svg_data" ng-change="ctrl.render();"></textarea>
+		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.svg_data" ng-change="ctrl.resetSVG(); ctrl.render();"></textarea>
 </div>
 
 <div class="editor-row">

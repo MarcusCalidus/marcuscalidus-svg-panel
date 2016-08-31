@@ -8,7 +8,8 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
   function link(scope, elem, attrs, ctrl) {
     var data, panel;
     elem = elem.find('.svg-panel');
-    var $tooltip = $('<div id="tooltip">');
+    var svgelem = elem.find('svg');
+    var plotCanvas = elem.find('.plot-canvas');
 
     ctrl.events.on('render', function () {
       render();
@@ -39,22 +40,25 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
     }
 
     function addSVG() {
+      var xml = jQuery.parseXML(panel.svg_data);
+
+      svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
+      svgelem.html(xml.documentElement.children);
+    }
+
+    function resizePlotCanvas() {
       var width = elem.width();
       var height = elem.height();
 
       var size = Math.min(width, height);
 
-      var plotCanvas = $('<div></div>');
       var plotCss = {
         top: '10px',
         margin: 'auto',
         position: 'relative',
         height: size - 20 + 'px'
       };
-
       plotCanvas.css(plotCss);
-      plotCanvas.html(panel.svg_data);
-      elem.html(plotCanvas);
     }
 
     function render() {
@@ -66,7 +70,13 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
       panel = ctrl.panel;
 
       if (setElementHeight()) {
-        addSVG();
+        resizePlotCanvas();
+
+        if (!ctrl.initialized) {
+          addSVG();
+          panel.doInit(ctrl, elem);
+          ctrl.initialized = 1;
+        }
 
         panel.handleMetric(ctrl, elem);
       }
