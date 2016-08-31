@@ -93,8 +93,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             valueName: 'current',
 
             svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
-            js_code: '//paste body of handleMetric function here\n\n//Parameters:\n//ctrl - instance of current svg-panel\n//elem - SVG panel html element',
-            js_init_code: '//this code is executed right after the first initialization of the SVG'
+            js_code: '',
+            js_init_code: ''
           };
 
           _.defaults(_this.panel, panelDefaults);
@@ -138,13 +138,13 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
         }, {
           key: 'setHandleMetricFunction',
           value: function setHandleMetricFunction() {
-            this.panel.handleMetric = Function('ctrl', 'elem', this.panel.js_code);
+            this.panel.handleMetric = Function('ctrl', 'svgnode', this.panel.js_code);
           }
         }, {
           key: 'setInitFunction',
           value: function setInitFunction() {
             this.initialized = 0;
-            this.panel.doInit = Function('ctrl', 'elem', this.panel.js_init_code);
+            this.panel.doInit = Function('ctrl', 'svgnode', this.panel.js_init_code);
           }
         }, {
           key: 'onRender',

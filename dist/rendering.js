@@ -9,6 +9,7 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
     var data, panel;
     elem = elem.find('.svg-panel');
     var svgelem = elem.find('svg');
+    var svgnode = svgelem.get(0);
     var plotCanvas = elem.find('.plot-canvas');
 
     ctrl.events.on('render', function () {
@@ -44,6 +45,7 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
 
       svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
       svgelem.html(xml.documentElement.children);
+      svgnode = svgelem.get(0);
     }
 
     function resizePlotCanvas() {
@@ -74,11 +76,11 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
 
         if (!ctrl.initialized) {
           addSVG();
-          panel.doInit(ctrl, elem);
+          panel.doInit(ctrl, svgnode);
           ctrl.initialized = 1;
         }
 
-        panel.handleMetric(ctrl, elem);
+        panel.handleMetric(ctrl, svgnode);
       }
     }
   }

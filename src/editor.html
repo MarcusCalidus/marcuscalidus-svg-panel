@@ -1,14 +1,26 @@
 <div class="editor-row">
-		<h5 class="section-heading">JavaScript Code: onHandleMetric(ctrl, elem)</h5>
+		<h5 class="section-heading">JavaScript Code: <code>onHandleMetric(ctrl, svgnode)</code></h5>
+		<ul style="padding-left: 40px;">
+		<li>This code is executed upon <strong>every refresh</strong></li>
+		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
+		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
+		</ul>
 		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea>
 </div>
 
 <div class="editor-row">
-		<h5 class="section-heading">JavaScript Code: onInit(ctrl, elem)</h5>
+		<p />
+		<h5 class="section-heading">JavaScript Code: <code>onInit(ctrl, svgnode)</code></h5>
+		<ul style="padding-left: 40px;">
+		<li>This code is executed <strong>once</strong>, right after the first initialization of the SVG</li>
+		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
+		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
+		</ul>
 		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_init_code" ng-change="ctrl.setInitFunction(); ctrl.render();"></textarea>
 </div>
 
 <div class="editor-row">
+		<p />
 		<h5 class="section-heading">SVG data</h5>
 		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.svg_data" ng-change="ctrl.resetSVG(); ctrl.render();"></textarea>
 </div>
@@ -17,7 +29,8 @@
 	<div class="section gf-form-group">
 		<h5 class="section-heading">Demos</h5>
 		<div class="gf-form">
-			<button class="btn btn-inverse gf-form-btn width-8" ng-click="ctrl.demos.clock()">Clock Demo</button>			
+			<button class="btn btn-inverse gf-form-btn width-8" ng-click="ctrl.demos.clock()">Clock Demo</button>	
+			<button class="btn btn-inverse gf-form-btn width-8" ng-click="ctrl.demos.snap()">Snap.svg Demo</button>			
 		</div>
 	</div>	
 </div>

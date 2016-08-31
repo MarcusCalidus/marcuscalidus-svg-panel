@@ -7,6 +7,7 @@ export default function link(scope, elem, attrs, ctrl) {
   var data, panel;
   elem = elem.find('.svg-panel');
   var svgelem = elem.find('svg');
+  var svgnode = svgelem.get(0);
   var plotCanvas = elem.find('.plot-canvas');
 
   ctrl.events.on('render', function() {
@@ -41,6 +42,7 @@ export default function link(scope, elem, attrs, ctrl) {
 
     svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
     svgelem.html(xml.documentElement.children); 
+    svgnode=svgelem.get(0);
   }
 
   function resizePlotCanvas() {
@@ -69,11 +71,11 @@ export default function link(scope, elem, attrs, ctrl) {
             
       if (!ctrl.initialized) {
         addSVG();    
-        panel.doInit(ctrl, elem);
+        panel.doInit(ctrl, svgnode);
         ctrl.initialized = 1;
       }
         
-      panel.handleMetric(ctrl, elem); 
+      panel.handleMetric(ctrl, svgnode); 
     }
   }
 }
