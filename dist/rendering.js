@@ -70,21 +70,28 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
       panel = ctrl.panel;
 
       if (setElementHeight()) {
-        svgnode = svgelem.contentDocument.documentElement;
+        if (svgelem.contentDocument) {
+          svgnode = svgelem.contentDocument.documentElement;
 
-        resizePlotCanvas();
+          if (svgnode.getAttribute("name") == 'isInitial') {
+            svgnode.removeAttribute("name");
+            ctrl.initialized = 0;
+          }
 
-        if (!ctrl.initialized) {
-          addSVG();
-          panel.doInit(ctrl, svgnode);
-          ctrl.initialized = 1;
+          resizePlotCanvas();
+
+          if (!ctrl.initialized) {
+            addSVG();
+            panel.doInit(ctrl, svgnode);
+            ctrl.initialized = 1;
+          }
+
+          panel.handleMetric(ctrl, svgnode);
+
+          svgnode = null;
+        } else {
+          ctrl.initialized = 0;
         }
-
-        panel.handleMetric(ctrl, svgnode);
-
-        svgnode = null;
-      } else {
-        ctrl.initialized = 0;
       }
     }
   }

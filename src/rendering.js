@@ -67,21 +67,29 @@ export default function link(scope, elem, attrs, ctrl) {
     panel = ctrl.panel;
 
     if (setElementHeight()) { 
-      svgnode = svgelem.contentDocument.documentElement;
+      if (svgelem.contentDocument) {
+      	svgnode = svgelem.contentDocument.documentElement;
+      	
+      	if (svgnode.getAttribute("name") == 'isInitial') {
+      	  svgnode.removeAttribute("name");
+      	  ctrl.initialized = 0;
+        }
       
-      resizePlotCanvas();
+      	resizePlotCanvas();
             
-      if (!ctrl.initialized) {
-        addSVG();    
-        panel.doInit(ctrl, svgnode);
-        ctrl.initialized = 1;
-      }
+      	if (!ctrl.initialized) {
+        	addSVG();    
+        	panel.doInit(ctrl, svgnode);
+        	ctrl.initialized = 1;
+      	}
         
-      panel.handleMetric(ctrl, svgnode); 
+      	panel.handleMetric(ctrl, svgnode); 
       
-      svgnode = null;
-    } else {
-      ctrl.initialized = 0;
+      	svgnode = null;
+      }
+   	  else {
+        ctrl.initialized = 0;
+      }
     }
   }
 }
