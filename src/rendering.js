@@ -4,7 +4,7 @@ import 'jquery.flot';
 import 'jquery.flot.pie';
 
 export default function link(scope, elem, attrs, ctrl) {
-  var data, panel;
+  var panel;
   var svgelem = elem[0].getElementsByClassName('svg-object')[0];
   elem = elem.find('.svg-panel');
   var plotCanvas = elem.find('.plot-canvas');
@@ -64,12 +64,7 @@ export default function link(scope, elem, attrs, ctrl) {
   }
    
   function render() {
-    if (!ctrl.data) { return; }
-
-    data = ctrl.data;
     panel = ctrl.panel;
-
-
 
     if (setElementHeight()) { 
       svgnode = svgelem.contentDocument.documentElement;
@@ -85,6 +80,8 @@ export default function link(scope, elem, attrs, ctrl) {
       panel.handleMetric(ctrl, svgnode); 
       
       svgnode = null;
+    } else {
+      ctrl.initialized = 0;
     }
   }
 }

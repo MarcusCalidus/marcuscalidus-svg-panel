@@ -90,7 +90,6 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             nullPointMode: 'connected',
             aliasColors: {},
             format: 'short',
-            valueName: 'current',
 
             svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
             js_code: '',
@@ -156,28 +155,12 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             if (!this.panel.doInit) {
               this.setInitFunction();
             }
-
-            this.data = this.parseSeries(this.series);
-          }
-        }, {
-          key: 'parseSeries',
-          value: function parseSeries(series) {
-            var _this2 = this;
-
-            return _.map(this.series, function (serie, i) {
-              return {
-                label: serie.alias,
-                data: serie.stats[_this2.panel.valueName],
-                color: _this2.panel.aliasColors[serie.alias] || _this2.$rootScope.colors[i]
-              };
-            });
           }
         }, {
           key: 'onDataReceived',
           value: function onDataReceived(dataList) {
             this.series = dataList.map(this.seriesHandler.bind(this));
-            this.data = this.parseSeries(this.series);
-            this.render(this.data);
+            this.render();
           }
         }, {
           key: 'resetSVG',
@@ -194,6 +177,25 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
             series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
             return series;
+          }
+        }, {
+          key: 'getSeriesIdByAlias',
+          value: function getSeriesIdByAlias(aliasName) {
+            for (var i = 0; i < this.series.length; i++) {
+              if (this.series[i].alias == aliasName) {
+                return i;
+              }
+            }
+            return -1;
+          }
+        }, {
+          key: 'getSeriesElementByAlias',
+          value: function getSeriesElementByAlias(aliasName) {
+            var i = this.getSeriesIdByAlias(aliasName);
+            if (i >= 0) {
+              return this.series[i];
+            }
+            return null;
           }
         }, {
           key: 'getDecimalsForValue',

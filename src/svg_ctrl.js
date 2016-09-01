@@ -21,8 +21,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
       cacheTimeout: null,
       nullPointMode: 'connected',
       aliasColors: {},
-      format: 'short',
-      valueName: 'current',
+      format: 'short',       
       
       svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
       js_code: '',
@@ -79,24 +78,11 @@ export class SVGCtrl extends MetricsPanelCtrl {
     if (!this.panel.doInit) {
       this.setInitFunction();
     }
-    
-    this.data = this.parseSeries(this.series);
-  }
-
-  parseSeries(series) {
-    return _.map(this.series, (serie, i) => {
-      return {
-        label: serie.alias,
-        data: serie.stats[this.panel.valueName],
-        color: this.panel.aliasColors[serie.alias] || this.$rootScope.colors[i]
-      };
-    });
   }
   
   onDataReceived(dataList) {
     this.series = dataList.map(this.seriesHandler.bind(this));
-    this.data = this.parseSeries(this.series);
-    this.render(this.data);
+    this.render();
   }
 
   resetSVG() {
@@ -111,6 +97,23 @@ export class SVGCtrl extends MetricsPanelCtrl {
 
     series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
     return series;
+  }
+  
+  getSeriesIdByAlias(aliasName) {
+  	for (var i = 0; i < this.series.length; i++) {
+  		if (this.series[i].alias == aliasName) {
+  			return i;
+  		}  		
+  	}
+  	return -1;
+  }
+  
+  getSeriesElementByAlias(aliasName) {
+  	var i = this.getSeriesIdByAlias(aliasName);
+  	if (i >= 0) {
+  	  return this.series[i];
+  	} 
+    return null;
   }
 
   getDecimalsForValue(value) {

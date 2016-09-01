@@ -6,7 +6,7 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
   var _, $;
 
   function link(scope, elem, attrs, ctrl) {
-    var data, panel;
+    var panel;
     var svgelem = elem[0].getElementsByClassName('svg-object')[0];
     elem = elem.find('.svg-panel');
     var plotCanvas = elem.find('.plot-canvas');
@@ -67,11 +67,6 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
     }
 
     function render() {
-      if (!ctrl.data) {
-        return;
-      }
-
-      data = ctrl.data;
       panel = ctrl.panel;
 
       if (setElementHeight()) {
@@ -88,6 +83,8 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
         panel.handleMetric(ctrl, svgnode);
 
         svgnode = null;
+      } else {
+        ctrl.initialized = 0;
       }
     }
   }
