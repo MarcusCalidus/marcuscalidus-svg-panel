@@ -73,7 +73,6 @@ export default function link(scope, elem, attrs, ctrl) {
 
     if (setElementHeight()) { 
       svgnode = svgelem.contentDocument.documentElement;
-      console.log(svgnode);
       
       resizePlotCanvas();
             

@@ -76,7 +76,6 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
 
       if (setElementHeight()) {
         svgnode = svgelem.contentDocument.documentElement;
-        console.log(svgnode);
 
         resizePlotCanvas();
 
