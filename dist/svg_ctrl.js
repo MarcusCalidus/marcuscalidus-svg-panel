@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', 'https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './frameworks/snap/snap.svg-min.js'], function (_export, _context) {
   "use strict";
 
   var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, _createClass, SVGCtrl;
@@ -48,8 +48,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
       rendering = _rendering.default;
     }, function (_demos) {
       SVGDemos = _demos.SVGDemos;
-    }, function (_httpsCdnjsCloudflareComAjaxLibsSnapSvg041SnapSvgMinJs) {
-      Snap = _httpsCdnjsCloudflareComAjaxLibsSnapSvg041SnapSvgMinJs.Snap;
+    }, function (_frameworksSnapSnapSvgMinJs) {
+      Snap = _frameworksSnapSnapSvgMinJs.Snap;
     }],
     execute: function () {
       _createClass = function () {
@@ -171,20 +171,6 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 color: _this2.panel.aliasColors[serie.alias] || _this2.$rootScope.colors[i]
               };
             });
-          }
-        }, {
-          key: 'fixSVGReferences',
-          value: function fixSVGReferences(svgnode) {
-            var xPathExpr = "//*/@*[starts-with(.,'url(#') or starts-with(.,concat('url(',\"'\",'#'))]";
-            var result = document.evaluate(xPathExpr, svgnode).iterateNext();
-
-            while (result) {
-              var s = result.value;
-              s = s.slice(0, s.indexOf('#')) + window.location.href + s.slice(s.indexOf('#'), s.length);
-              result.value = s;
-
-              result = document.evaluate(xPathExpr, svgnode).iterateNext();
-            }
           }
         }, {
           key: 'onDataReceived',

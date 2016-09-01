@@ -5,10 +5,10 @@ import 'jquery.flot.pie';
 
 export default function link(scope, elem, attrs, ctrl) {
   var data, panel;
+  var svgelem = elem[0].getElementsByClassName('svg-object')[0];
   elem = elem.find('.svg-panel');
-  var svgelem = elem.find('svg');
-  var svgnode = svgelem.get(0);
   var plotCanvas = elem.find('.plot-canvas');
+  var svgnode;
 
   ctrl.events.on('render', function() {
     render();
@@ -39,11 +39,13 @@ export default function link(scope, elem, attrs, ctrl) {
 
   function addSVG() {        
     var xml = jQuery.parseXML(panel.svg_data);
-      
-    svgelem.get(0).setAttribute("viewBox", xml.documentElement.getAttribute("viewBox"));
-    svgelem.html(xml.documentElement.children); 
-    svgnode=svgelem.get(0);
-    ctrl.fixSVGReferences(svgnode);
+     
+    for (var i = 0; i < xml.documentElement.attributes.length; i++) {
+      var attrib = xml.documentElement.attributes[i];
+      svgnode.setAttribute(attrib.name, attrib.value);
+	} 
+	
+    $(svgnode).html(xml.documentElement.children); 
   } 
 
   function resizePlotCanvas() {
@@ -56,7 +58,7 @@ export default function link(scope, elem, attrs, ctrl) {
       top: '10px',
       margin: 'auto',
       position: 'relative',
-      height: (size - 20) + 'px'
+      height: (size) + 'px'
     };
     plotCanvas.css(plotCss);
   }
@@ -67,7 +69,12 @@ export default function link(scope, elem, attrs, ctrl) {
     data = ctrl.data;
     panel = ctrl.panel;
 
+
+
     if (setElementHeight()) { 
+      svgnode = svgelem.contentDocument.documentElement;
+      console.log(svgnode);
+      
       resizePlotCanvas();
             
       if (!ctrl.initialized) {
@@ -77,6 +84,8 @@ export default function link(scope, elem, attrs, ctrl) {
       }
         
       panel.handleMetric(ctrl, svgnode); 
+      
+      svgnode = null;
     }
   }
 }

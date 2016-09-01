@@ -4,7 +4,7 @@ import kbn from 'app/core/utils/kbn';
 import TimeSeries from 'app/core/time_series';
 import rendering from './rendering';
 import {SVGDemos} from './demos';
-import {Snap} from 'https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js';
+import {Snap} from './frameworks/snap/snap.svg-min.js';
 
 export class SVGCtrl extends MetricsPanelCtrl {
 
@@ -93,20 +93,6 @@ export class SVGCtrl extends MetricsPanelCtrl {
     });
   }
   
-  fixSVGReferences(svgnode) {
-    var xPathExpr = "//*/@*[starts-with(.,'url(#') or starts-with(.,concat('url(',\"'\",'#'))]";
-    var result=document.evaluate(xPathExpr, svgnode).iterateNext();
-
-	while (result)
-  	{
-  	  var s = result.value;
-  	  s = s.slice(0, s.indexOf('#')) + window.location.href + s.slice(s.indexOf('#'), s.length);
-  	  result.value = s;
-  	  
-      result=document.evaluate(xPathExpr, svgnode).iterateNext();
-    }
-  }
-
   onDataReceived(dataList) {
     this.series = dataList.map(this.seriesHandler.bind(this));
     this.data = this.parseSeries(this.series);
