@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', 'node_modules/snapsvg/dist/snap.svg-min.js'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', 'node_modules/snapsvg/dist/snap.svg-min.js'], function(_export, _context) {
     "use strict";
 
     var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, _createClass, SVGCtrl;
@@ -36,23 +36,23 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
     }
 
     return {
-        setters: [function (_appPluginsSdk) {
+        setters: [function(_appPluginsSdk) {
             MetricsPanelCtrl = _appPluginsSdk.MetricsPanelCtrl;
-        }, function (_lodash) {
+        }, function(_lodash) {
             _ = _lodash.default;
-        }, function (_appCoreUtilsKbn) {
+        }, function(_appCoreUtilsKbn) {
             kbn = _appCoreUtilsKbn.default;
-        }, function (_appCoreTime_series) {
+        }, function(_appCoreTime_series) {
             TimeSeries = _appCoreTime_series.default;
-        }, function (_rendering) {
+        }, function(_rendering) {
             rendering = _rendering.default;
-        }, function (_demos) {
+        }, function(_demos) {
             SVGDemos = _demos.SVGDemos;
-        }, function (_node_modulesSnapsvgDistSnapSvgMinJs) {
+        }, function(_node_modulesSnapsvgDistSnapSvgMinJs) {
             Snap = _node_modulesSnapsvgDistSnapSvgMinJs.Snap;
         }],
-        execute: function () {
-            _createClass = function () {
+        execute: function() {
+            _createClass = function() {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -63,14 +63,14 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     }
                 }
 
-                return function (Constructor, protoProps, staticProps) {
+                return function(Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
                 };
             }();
 
-            _export('SVGCtrl', SVGCtrl = function (_MetricsPanelCtrl) {
+            _export('SVGCtrl', SVGCtrl = function(_MetricsPanelCtrl) {
                 _inherits(SVGCtrl, _MetricsPanelCtrl);
 
                 function SVGCtrl($scope, $injector, $rootScope) {
