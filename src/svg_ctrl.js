@@ -4,7 +4,7 @@ import kbn from 'app/core/utils/kbn';
 import TimeSeries from 'app/core/time_series';
 import rendering from './rendering';
 import { SVGDemos } from './demos';
-import { Snap } from 'node_modules/snapsvg/dist/snap.svg-min.js';
+import { Snap } from './node_modules/snapsvg/dist/snap.svg-min.js';
 
 export class SVGCtrl extends MetricsPanelCtrl {
 
