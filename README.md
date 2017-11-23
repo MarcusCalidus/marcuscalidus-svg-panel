@@ -1,5 +1,9 @@
 You need the lastest grafana build for Grafana 3.0 to enable plugin support. You can get it here : http://grafana.org/download/builds.html
 
+#Example
+
+![Screenshot](screenshots/inAction.png)
+
 ## Installation
 
 It is possible to clone this repo directly into your plugins directory.
@@ -26,12 +30,14 @@ Note that if you clone it into the grafana plugins directory you do not need to 
 if you want to place the plugin in a directory outside the standard plugins directory. Be aware that grafana-server
 needs read access to the directory.
 
-#Usage
-##Demos
+# Usage
+## Demos
 For a start check out the Demo-SVGs provided with the panel plugin. To load them go to the bottom of the options page and click the corresponding button
 
-##Events
-###onHandleMetric
+![Screenshot](screenshots/demoButtons.png)
+
+## Events
+### onHandleMetric
 this code is execute upon **every Rerfresh**
 
 ```
@@ -48,8 +54,9 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
+![Screenshot](screenshots/onHandleMetric.png)
 
-###onInit
+### onInit
 this event is executed **once**, right after the first initializiation of the SVG.
 ```
 onHandleMetric(ctrl: MetricsPanelCtrl, svgnode: HTMLElement)
@@ -65,8 +72,12 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
-##SVG Data 
+![Screenshot](screenshots/onInit.png)
+
+## SVG Data 
 paste your svg code here. Don't forget to include a viewbox and IDs for all relevant objects.
+
+![Screenshot](screenshots/svgData.png)
 
 # Changelog
 
