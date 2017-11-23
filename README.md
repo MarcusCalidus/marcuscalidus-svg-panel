@@ -1,8 +1,11 @@
+# Summary
+Grafana panel for displaying metric sensitive SVG images using the snap svg library ([http://snapsvg.io/](http://snapsvg.io/)).
+
 You need the lastest grafana build for Grafana 3.0 to enable plugin support. You can get it here : http://grafana.org/download/builds.html
 
-#Example
+# Example
 
-![Screenshot](screenshots/inAction.png)
+![Screenshot](img/inAction.png)
 
 ## Installation
 
@@ -34,7 +37,7 @@ needs read access to the directory.
 ## Demos
 For a start check out the Demo-SVGs provided with the panel plugin. To load them go to the bottom of the options page and click the corresponding button
 
-![Screenshot](screenshots/demoButtons.png)
+![Screenshot](img/demoButtons.png)
 
 ## Events
 ### onHandleMetric
@@ -54,7 +57,7 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
-![Screenshot](screenshots/onHandleMetric.png)
+![Screenshot](img/onHandleMetric.png)
 
 ### onInit
 this event is executed **once**, right after the first initializiation of the SVG.
@@ -72,12 +75,12 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
-![Screenshot](screenshots/onInit.png)
+![Screenshot](img/onInit.png)
 
 ## SVG Data 
 paste your svg code here. Don't forget to include a viewbox and IDs for all relevant objects.
 
-![Screenshot](screenshots/svgData.png)
+![Screenshot](img/svgData.png)
 
 # Changelog
 

@@ -17,10 +17,9 @@ module.exports = function(grunt) {
                 dest: 'dist'
             },
             img_to_dist: {
-                cwd: 'src',
                 expand: true,
-                src: ['img/*'],
-                dest: 'dist/src/'
+                src: ['img/**'],
+                dest: 'dist'
             },
             pluginDef: {
                 expand: true,

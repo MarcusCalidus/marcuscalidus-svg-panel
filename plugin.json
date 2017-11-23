@@ -1,21 +1,37 @@
 {
-  "type": "panel",
-  "name": "SVG",
-  "id": "grafana-svg-panel",
+    "type": "panel",
+    "name": "SVG",
+    "id": "grafana-svg-panel",
 
-  "info": {
-    "description": "SVG panel for grafana",
-    "author": {
-      "name": "Marco.Warm@birkenstock.com",
-      "url": "https://jira.birkenstock.com/bitbucket/projects/PANDA/"
+    "info": {
+        "description": "SVG panel for grafana",
+        "author": {
+            "name": "MarcusCalidus@gmail.com",
+            "url": "https://github.com/MarcusCalidus/grafana-svg-panel"
+        },
+        "keywords": ["svg", "panel"],
+        "logos": {
+            "small": "img/svgpanel_logo_small.png",
+            "large": "img/svgpanel_logo_large.png"
+        },
+        "links": [
+            { "name": "Snap.svg", "url": "http://snapsvg.io/" },
+            { "name": "MIT License", "url": "https://github.com/grafana/piechart-panel/blob/master/LICENSE" },
+            { "name": "Project", "url": "https://github.com/MarcusCalidus/grafana-svg-panel" }
+        ],
+        "screenshots": [
+            { "name": "In Action", "path": "img/inAction.png" },
+            { "name": "Event onInit", "path": "img/onInit.png" },
+            { "name": "Event onHandleMetric", "path": "img/onHandleMetric.png" },
+            { "name": "SVG data", "path": "img/svgData.png" },
+            { "name": "included Demos", "path": "img/demoButtons.png" }
+        ],
+        "version": "0.0.1",
+        "updated": "2017-11-23"
     },
-    "keywords": ["svg", "panel"],
-    "version": "1.0.0",
-    "updated": "2016-08-29"
-  },
 
-  "dependencies": {
-    "grafanaVersion": "3.x.x",
-    "plugins": [ ]
-  }
+    "dependencies": {
+        "grafanaVersion": "3.x.x",
+        "plugins": []
+    }
 }
