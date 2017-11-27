@@ -93,7 +93,28 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
                         svg_data: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000" ></svg>',
                         js_code: '',
-                        js_init_code: ''
+                        js_init_code: '',
+                        useSVGBuilder: false,
+                        svgBuilderData: {
+                            width: '100%',
+                            height: '100%',
+                            viewport: {
+                                x: 0,
+                                y: 0,
+                                width: 1000,
+                                height: 1000
+                            },
+                            elements: [{
+                                name: 'dummy',
+                                id: 'myDummy',
+                                x: 0,
+                                y: 0,
+                                rotate: 0,
+                                rcenterx: 0,
+                                rcentery: 0,
+                                scale: 1
+                            }]
+                        }
                     };
 
                     _.defaults(_this.panel, panelDefaults);
@@ -112,7 +133,10 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 _createClass(SVGCtrl, [{
                     key: 'onInitEditMode',
                     value: function onInitEditMode() {
-                        this.addEditorTab('Options', 'public/plugins/grafana-svg-panel/editor.html', 2);
+                        this.addEditorTab('SVG Builder', 'public/plugins/grafana-svg-panel/editor_builder.html', 2);
+                        this.addEditorTab('SVG', 'public/plugins/grafana-svg-panel/editor_svg.html', 3);
+                        this.addEditorTab('Events', 'public/plugins/grafana-svg-panel/editor_events.html', 4);
+                        this.prepareEditor();
                         this.unitFormats = kbn.getUnitFormats();
                     }
                 }, {
@@ -253,6 +277,141 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     key: 'link',
                     value: function link(scope, elem, attrs, ctrl) {
                         rendering(scope, elem, attrs, ctrl);
+                    }
+                }, {
+                    key: 'removeElement',
+                    value: function removeElement(idx) {
+                        this.panel.svgBuilderData.elements.splice(idx, 1);
+                        this.buildSVG();
+                    }
+                }, {
+                    key: 'prepareEditor',
+                    value: function prepareEditor() {
+                        var _this2 = this;
+
+                        var request = new XMLHttpRequest();
+
+                        request.open("GET", "public/plugins/grafana-svg-panel/assets/repositories.json");
+                        request.addEventListener('load', function (event) {
+                            if (request.status >= 200 && request.status < 300) {
+                                _this2.panel.repositories = JSON.parse(request.responseText);
+                            } else {
+                                console.warn(request.statusText, request.responseText);
+                            }
+                        });
+                        request.send();
+                    }
+                }, {
+                    key: 'repositorySelected',
+                    value: function repositorySelected() {
+                        var newCategories = [];
+                        this.panel.selectedSVG = null;
+
+                        if (this.panel.repositories[this.panel.selectedRepository]) {
+                            _.forEach(this.panel.repositories[this.panel.selectedRepository].items, function (item) {
+                                if (!_.includes(newCategories, item.category)) {
+                                    newCategories.push(item.category);
+                                }
+                            });
+                        }
+
+                        this.panel.categories = newCategories;
+                    }
+                }, {
+                    key: 'categorySelected',
+                    value: function categorySelected() {
+                        var _this3 = this;
+
+                        this.panel.svglist = [];
+                        this.panel.selectedSVG = null;
+
+                        if (this.panel.repositories[this.panel.selectedRepository]) {
+                            this.panel.svglist = _.filter(this.panel.repositories[this.panel.selectedRepository].items, function (item) {
+                                return item.category === _this3.panel.selectedCategory;
+                            });
+                            console.log(this.panel.svglist);
+                        }
+                    }
+                }, {
+                    key: 'addSVGItem',
+                    value: function addSVGItem() {
+                        var svg = JSON.parse(this.panel.selectedSVG);
+
+                        this.panel.svgBuilderData.elements.push({
+                            name: svg.name,
+                            id: svg.name,
+                            path: svg.path,
+                            x: 0,
+                            y: 0,
+                            rotate: 0,
+                            rcenterx: 0,
+                            rcentery: 0,
+                            scale: 1
+                        });
+                        this.buildSVG();
+                    }
+                }, {
+                    key: 'buildSVG',
+                    value: function buildSVG() {
+                        var _this4 = this;
+
+                        var all = function all(array) {
+                            var deferred = $.Deferred();
+                            var fulfilled = 0,
+                                length = array.length;
+                            var results = [];
+
+                            if (length === 0) {
+                                deferred.resolve(results);
+                            } else {
+                                array.forEach(function (promise, i) {
+                                    $.when(promise()).then(function (value) {
+                                        results[i] = value;
+                                        fulfilled++;
+                                        if (fulfilled === length) {
+                                            deferred.resolve(results);
+                                        }
+                                    });
+                                });
+                            }
+
+                            return deferred.promise();
+                        };
+
+                        var panel = this.panel;
+                        if (panel.useSVGBuilder) {
+                            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            var svgNS = svg.namespaceURI;
+
+                            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                            svg.setAttribute('width', panel.svgBuilderData.width);
+                            svg.setAttribute('height', panel.svgBuilderData.height);
+                            svg.setAttribute('viewBox', panel.svgBuilderData.viewport.x + ' ' + panel.svgBuilderData.viewport.y + ' ' + panel.svgBuilderData.viewport.width + ' ' + panel.svgBuilderData.viewport.height);
+
+                            var promises = [];
+
+                            panel.svgBuilderData.elements.forEach(function (element) {
+                                promises.push(function () {
+                                    return $.Deferred(function (dfd) {
+                                        $.get('public/plugins/grafana-svg-panel/assets/' + element.path, function (data) {
+                                            dfd.resolve(data);
+                                        });
+                                    }).promise();
+                                });
+                            });
+
+                            $.when(all(promises)).then(function (results) {
+                                results.forEach(function (svgFragment, i) {
+                                    var g = document.createElementNS(svgNS, 'g');
+                                    g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y + ') ' + 'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcenterx + ') ' + 'scale(' + panel.svgBuilderData.elements[i].scale + ')');
+                                    svg.appendChild(g);
+                                    $(g).html(svgFragment.documentElement.children);
+                                });
+                                panel.svg_data = svg.outerHTML;
+                                _this4.resetSVG();
+                                _this4.render();
+                            });
+                        }
                     }
                 }]);
 

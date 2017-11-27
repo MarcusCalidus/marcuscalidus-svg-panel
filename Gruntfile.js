@@ -21,6 +21,11 @@ module.exports = function(grunt) {
                 src: ['img/**'],
                 dest: 'dist'
             },
+            assets_to_dist: {
+                expand: true,
+                src: ['assets/**'],
+                dest: 'dist'
+            },
             pluginDef: {
                 expand: true,
                 src: ['plugin.json', 'README.md'],
@@ -60,5 +65,5 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', ['clean', 'copy:src_to_dist', 'copy:img_to_dist', 'copy:pluginDef', 'babel', 'copy:frameworks']);
+    grunt.registerTask('default', ['clean', 'copy:src_to_dist', 'copy:img_to_dist', 'copy:assets_to_dist', 'copy:pluginDef', 'babel', 'copy:frameworks']);
 };

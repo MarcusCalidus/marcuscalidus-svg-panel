@@ -1,0 +1,27 @@
+{
+    "marcuscalidus" : {
+        "author": "Marco.Warm@birkenstock.com",
+        "description": "simple examples",
+        "license": "MIT",
+        "items" :  [
+            {
+                "category": "name of the category",
+                "name": "algolia",
+                "path": "marcuscalidus/algolia.svg",
+                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+            },
+            {
+                "category": "name of the category",
+                "name": "amazon",
+                "path": "marcuscalidus/amazon.svg",
+                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+            },
+            {
+                "category": "name of the category",
+                "name": "amilia",
+                "path": "marcuscalidus/amilia.svg",
+                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+            }
+        ]
+    }
+}

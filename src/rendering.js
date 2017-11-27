@@ -38,12 +38,13 @@ export default function link(scope, elem, attrs, ctrl) {
   }
 
   function addSVG() {        
+    console.log(panel.svg_data);
     var xml = jQuery.parseXML(panel.svg_data);
      
     for (var i = 0; i < xml.documentElement.attributes.length; i++) {
-      var attrib = xml.documentElement.attributes[i];
-      svgnode.setAttribute(attrib.name, attrib.value);
-	} 
+        var attrib = xml.documentElement.attributes[i];
+        svgnode.setAttribute(attrib.name, attrib.value);
+	  } 
 	
     $(svgnode).html(xml.documentElement.children); 
   } 

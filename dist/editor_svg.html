@@ -1,0 +1,21 @@
+<div class="editor-row">
+		<p />
+		<h5 class="section-heading">SVG data</h5>
+		<p ng-if="ctrl.panel.useSVGBuilder">
+			SVG source cannot be edited while SVG Builder option is checked.
+		</p>
+		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-readonly="ctrl.panel.useSVGBuilder" ng-model="ctrl.panel.svg_data" ng-change="ctrl.resetSVG(); ctrl.render();"></textarea>
+</div>
+
+<div class="editor-row">
+		<div class="section gf-form-group">
+			<h5 class="section-heading">Demos</h5>
+			<div class="gf-form">
+				<button class="btn btn-inverse gf-form-btn width-16" ng-click="ctrl.demos.clock()">Clock Demo</button>	
+				<button class="btn btn-inverse gf-form-btn width-16" ng-click="ctrl.demos.snap()">Snap.svg Demo</button>	
+				<button class="btn btn-inverse gf-form-btn width-16" ng-click="ctrl.demos.animationCont()">Continuous Animation Demo</button>			
+			</div>
+		</div>	
+	</div>
+	
+	
