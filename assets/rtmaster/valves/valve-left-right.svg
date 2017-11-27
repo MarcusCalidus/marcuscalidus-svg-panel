@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="valve-round-left_1" transform="translate(0,0)" >
+		<svg height="127" viewBox="0 0 509 456" width="135" preserveAspectRatio="none">
+			<path style="fill:#c0c0c0;stroke:#000;stroke-width:2" d="M509,456 l-228,-456 228,0 -228,456 228,0z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M394,228 l-212,0">
+			</path>
+			<path style="fill:#c0c0c0;stroke:#000;stroke-width:2" d="M185,228 l0,186 -19,-1 -18,-3 -18,-4 -17,-7 -16,-8 -15,-9 -15,-11 -13,-12 -12,-13 -10,-14 -10,-16 -7,-16 -7,-17 -4,-18 -3,-18 -1,-19 1,-19 3,-19 4,-17 7,-18 7,-16 10,-15 10,-14 12,-14 13,-12 15,-10 15,-10 16,-7 17,-7 18,-4 18,-3 19,-1 0,186z">
+			</path>
+		</svg>
+	</g>
+</svg>

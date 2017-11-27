@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="line-horizontal-arrow-left" transform="translate(0,0)" >
+		<line id="Line1_Line" stroke="#000" stroke-width="3px" x1="101" y1="137" x2="311" y2="137" >
+		</line>
+		<path id="Line1_Arrow" fill="#000" stroke="#000" stroke-width="3px" d="M 101 137 L 125 147 L 125 127 z">
+		</path>
+	</g>
+</svg>

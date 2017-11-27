@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="pipe-tee-down_1" transform="translate(0,0)" >
+		<svg height="144" viewBox="0 0 500 500" width="138" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M375,500 l0,-250 125,0 0,-250 -500,0 0,250 125,0 0,250 250,0z">
+			</path>
+			<path style="fill:#999" d="M360,500 l0,-266 140,0 0,-218 -500,0 0,218 141,0 0,266 219,0z">
+			</path>
+			<path style="fill:#b2b2b2" d="M334,500 l0,-292 166,0 0,-166 -500,0 0,166 167,0 0,292 167,0z">
+			</path>
+			<path style="fill:#ccc" d="M308,500 l0,-318 192,0 0,-114 -500,0 0,114 193,0 0,318 115,0z">
+			</path>
+			<path style="fill:#e5e5e5" d="M287,500 l0,-338 213,0 0,-73 -500,0 0,73 209,0 0,338 78,0z">
+			</path>
+			<path style="fill:#fff" d="M266,500 l0,-359 234,0 0,-32 -500,0 0,32 235,0 0,359 31,0z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M375,500 l0,-250 125,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M125,500 l0,-250 -125,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M0,0 l500,0">
+			</path>
+		</svg>
+	</g>
+</svg>

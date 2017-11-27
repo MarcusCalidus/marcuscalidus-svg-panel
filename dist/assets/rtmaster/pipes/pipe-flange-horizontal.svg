@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="pipe-flange-horizontal" transform="translate(0,0)" >
+		<svg height="60" viewBox="0 0 125 500" width="172" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M125,500 l-125,0 0,-500 125,0 0,500z">
+			</path>
+			<path style="fill:#999" d="M125,469 l-125,0 0,-439 125,0 0,439z">
+			</path>
+			<path style="fill:#b2b2b2" d="M125,415 l-125,0 0,-332 125,0 0,332z">
+			</path>
+			<path style="fill:#ccc" d="M125,364 l-125,0 0,-229 125,0 0,229z">
+			</path>
+			<path style="fill:#e5e5e5" d="M125,324 l-125,0 0,-147 125,0 0,147z">
+			</path>
+			<path style="fill:#fff" d="M125,280 l-125,0 0,-61 125,0 0,61z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M125,500 l-125,0 0,-500 125,0 0,500">
+			</path>
+		</svg>
+	</g>
+</svg>

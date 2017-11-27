@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="valve-square-right_1" transform="translate(0,0)" >
+		<svg height="134" viewBox="0 0 498 456" width="126" preserveAspectRatio="none">
+			<path style="fill:#c0c0c0;stroke:#000;stroke-width:2" d="M0,456 l228,-456 -228,0 228,456 -228,0z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M115,228 l238,0">
+			</path>
+			<path style="fill:#c0c0c0;stroke:#000;stroke-width:2" d="M498,416 l0,-376 -145,0 0,376 145,0z">
+			</path>
+		</svg>
+	</g>
+</svg>

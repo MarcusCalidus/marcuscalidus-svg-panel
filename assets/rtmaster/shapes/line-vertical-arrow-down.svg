@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="line-vertical-arrow-down" transform="translate(0,0)" >
+		<line id="Line1_Line" stroke="#000000" stroke-width="3px" x1="100" y1="227" x2="100" y2="55" >
+		</line>
+		<path id="Line1_Arrow" fill="#000000" stroke="#000000" stroke-width="3px" d="M 100 227 L 110 203 L 90 203 z">
+		</path>
+	</g>
+</svg>

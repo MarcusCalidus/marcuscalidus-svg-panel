@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="pipe-diagonal-right_1" transform="translate(0,0)" >
+		<svg height="252" viewBox="0 0 500 500" width="221" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M0,395 l395,-395 105,105 -395,395 -105,-105z">
+			</path>
+			<path style="fill:#999" d="M7,402 l395,-395 92,92 -395,395 -92,-92z">
+			</path>
+			<path style="fill:#b2b2b2" d="M18,413 l395,-395 70,70 -395,395 -70,-70z">
+			</path>
+			<path style="fill:#ccc" d="M29,424 l395,-396 48,49 -395,395 -48,-48z">
+			</path>
+			<path style="fill:#e5e5e5" d="M37,432 l395,-395 31,31 -395,395 -31,-31z">
+			</path>
+			<path style="fill:#fff" d="M46,441 l395,-395 13,13 -395,395 -13,-13z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M105,500 l395,-395">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M395,0 l-395,395">
+			</path>
+		</svg>
+	</g>
+</svg>

@@ -104,16 +104,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                                 width: 1000,
                                 height: 1000
                             },
-                            elements: [{
-                                name: 'dummy',
-                                id: 'myDummy',
-                                x: 0,
-                                y: 0,
-                                rotate: 0,
-                                rcenterx: 0,
-                                rcentery: 0,
-                                scale: 1
-                            }]
+                            elements: []
                         }
                     };
 
@@ -285,6 +276,11 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                         this.buildSVG();
                     }
                 }, {
+                    key: 'moveElement',
+                    value: function moveElement(idx, steps) {
+                        this.panel.svgBuilderData.elements = _.move(this.panel.svgBuilderData.elements, idx, idx + steps);
+                    }
+                }, {
                     key: 'prepareEditor',
                     value: function prepareEditor() {
                         var _this2 = this;
@@ -403,7 +399,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                             $.when(all(promises)).then(function (results) {
                                 results.forEach(function (svgFragment, i) {
                                     var g = document.createElementNS(svgNS, 'g');
-                                    g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y + ') ' + 'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcenterx + ') ' + 'scale(' + panel.svgBuilderData.elements[i].scale + ')');
+                                    g.setAttribute('id', panel.svgBuilderData.elements[i].id);
+                                    g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y + ') ' + 'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcentery + ') ' + 'scale(' + panel.svgBuilderData.elements[i].scale + ')');
                                     svg.appendChild(g);
                                     $(g).html(svgFragment.documentElement.children);
                                 });

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="valve-vertical_1" transform="translate(0,0)" >
+		<svg height="264" viewBox="0 0 279 999" width="127" preserveAspectRatio="none">
+			<path style="fill:#c0c0c0;stroke:#000;stroke-width:2" d="M0,219 l279,560 -279,0 279,-560 -279,0z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M140,219 l0,-219">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M140,779 l0,220">
+			</path>
+		</svg>
+	</g>
+</svg>

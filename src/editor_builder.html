@@ -63,6 +63,16 @@
 
 			<input type="number" class="input-small gf-form-input width-6" ng-model="ctrl.panel.svgBuilderData.elements[$index].scale" ng-change="ctrl.buildSVG()" ng-model-onblur>
 			<label class="gf-form-label">
+				<a class="pointer" tabindex="1" ng-click="ctrl.moveElement($index, -1)">
+					<i class="fa fa-arrow-up"></i>
+				</a>
+			</label>
+			<label class="gf-form-label">
+				<a class="pointer" tabindex="1" ng-click="ctrl.moveElement($index, 1)">
+					<i class="fa fa-arrow-down"></i>
+				</a>
+			</label>
+			<label class="gf-form-label">
 				<a class="pointer" tabindex="1" ng-click="ctrl.removeElement($index)">
 					<i class="fa fa-trash"></i>
 				</a>

@@ -41,7 +41,6 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
     }
 
     function addSVG() {
-      console.log(panel.svg_data);
       var xml = jQuery.parseXML(panel.svg_data);
 
       for (var i = 0; i < xml.documentElement.attributes.length; i++) {

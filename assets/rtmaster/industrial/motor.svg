@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="motor_1" transform="translate(0,0)" >
+		<svg height="195" viewBox="0 0 967 530" width="322" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M952,390 l-250,62 0,63 -625,0 -62,-63 0,-375 62,-62 625,0 0,62 250,63 0,250z">
+			</path>
+			<path style="fill:#b2b2b2" d="M952,359 l-250,46 0,47 -625,0 -62,-47 0,-281 62,-46 625,0 0,46 250,47 0,188z">
+			</path>
+			<path style="fill:#e5e5e5" d="M952,296 l-250,16 0,15 -625,0 -62,-15 0,-94 62,-15 625,0 0,15 250,16 0,62z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M952,390 l-250,62 0,63 -625,0 -62,-63 0,-375 62,-62 625,0 0,62 250,63 0,250">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M702,452 l0,-375">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M77,515 l0,-500">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M640,515 l0,-500">
+			</path>
+			<path style="fill:#7f7f7f;stroke:#000;stroke-width:2" d="M390,515 l0,-313 -250,0 0,313 250,0z">
+			</path>
+			<path style="fill:none;stroke:#fff;stroke-width:2" d="M140,515 l0,-313 250,0">
+			</path>
+		</svg>
+	</g>
+</svg>

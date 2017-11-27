@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="pipe-tee-right_1" transform="translate(0,0)" >
+		<svg height="144" viewBox="0 0 500 500" width="138" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M500,125 l-250,0 0,-125 -250,0 0,500 250,0 0,-125 250,0 0,-250z">
+			</path>
+			<path style="fill:#999" d="M500,141 l-265,0 0,-141 -219,0 0,500 219,0 0,-141 265,0 0,-218z">
+			</path>
+			<path style="fill:#b2b2b2" d="M500,167 l-291,0 0,-167 -167,0 0,500 167,0 0,-167 291,0 0,-166z">
+			</path>
+			<path style="fill:#ccc" d="M500,193 l-317,0 0,-193 -115,0 0,500 115,0 0,-193 317,0 0,-114z">
+			</path>
+			<path style="fill:#e5e5e5" d="M500,214 l-338,0 0,-214 -73,0 0,500 73,0 0,-208 338,0 0,-78z">
+			</path>
+			<path style="fill:#fff" d="M500,234 l-359,0 0,-234 -31,0 0,500 31,0 0,-234 359,0 0,-32z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M500,125 l-250,0 0,-125">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M500,375 l-250,0 0,125">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M0,500 l0,-500">
+			</path>
+		</svg>
+	</g>
+</svg>

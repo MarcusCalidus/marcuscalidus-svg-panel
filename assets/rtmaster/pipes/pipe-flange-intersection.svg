@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="pipe-intersection" transform="translate(0,0)" >
+		<svg height="153" viewBox="0 0 500 500" width="171" preserveAspectRatio="none">
+			<path style="fill:#7f7f7f" d="M0,125 l125,0 0,-125 250,0 0,125 125,0 0,250 -125,0 0,125 -250,0 0,-125 -125,0 0,-250z">
+			</path>
+			<path style="fill:#999" d="M0,141 l141,0 0,-141 219,0 0,141 140,0 0,218 -140,0 0,141 -219,0 0,-141 -141,0 0,-218z">
+			</path>
+			<path style="fill:#b2b2b2" d="M0,167 l167,0 0,-167 167,0 0,167 166,0 0,166 -166,0 0,167 -167,0 0,-167 -167,0 0,-166z">
+			</path>
+			<path style="fill:#ccc" d="M0,193 l193,0 0,-193 115,0 0,193 192,0 0,114 -192,0 0,193 -115,0 0,-193 -193,0 0,-114z">
+			</path>
+			<path style="fill:#e5e5e5" d="M0,214 l214,0 0,-214 73,0 0,214 213,0 0,73 -213,0 0,213 -73,0 0,-213 -214,0 0,-73z">
+			</path>
+			<path style="fill:#fff" d="M0,234 l235,0 0,-234 31,0 0,234 234,0 0,32 -234,0 0,234 -31,0 0,-234 -235,0 0,-32z">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M0,125 l125,0 0,-125">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M375,0 l0,125 125,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M500,375 l-125,0 0,125">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M125,500 l0,-125 -125,0">
+			</path>
+		</svg>
+	</g>
+</svg>

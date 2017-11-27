@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="gauge_1" transform="translate(0,0)" >
+		<svg height="163" viewBox="0 0 499 999" width="93" preserveAspectRatio="none">
+			<path style="fill:#ccc;stroke:#000;stroke-width:2" d="M166,457 l167,0 0,250 -167,0 0,-250z">
+			</path>
+			<circle cx="249" cy="249" r="249" style="fill:#ccc;stroke:#000;stroke-width:2">
+			</circle>
+			<circle cx="249" cy="249" r="187" style="fill:#f2f2f2">
+			</circle>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M62,249 l47,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M389,249 l47,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M249,62 l0,47">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M249,389 l0,47">
+			</path>
+			<path style="fill:#ccc;stroke:#000;stroke-width:2" d="M166,707 l0,125 -125,0 0,167 416,0 0,-167 -124,0 0,-125 -167,0z">
+			</path>
+			<path style="fill:none;stroke:#7f7f7f;stroke-width:2" d="M117,381 l-23,-28 -14,-24 -10,-25 -6,-27 -2,-28 4,-37 11,-35 17,-32 23,-28 28,-23 32,-17 35,-11 37,-4 37,4 26,7 25,11 24,15 20,18">
+			</path>
+			<path style="fill:none;stroke:#fff;stroke-width:2" d="M381,117 l24,28 13,24 10,26 6,27 2,27 -3,38 -11,35 -18,32 -23,27 -27,23 -32,18 -35,11 -38,3 -36,-3 -27,-8 -25,-11 -23,-15 -21,-18">
+			</path>
+			<circle cx="249" cy="249" r="41" style="fill:#ccc;stroke:#000;stroke-width:2">
+			</circle>
+		</svg>
+	</g>
+</svg>

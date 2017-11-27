@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3998 1617">
+	<g id="ship_1" transform="translate(0,0)" >
+		<svg height="174" viewBox="0 0 998 285" width="379" preserveAspectRatio="none">
+			<path style="fill:#808080;fill-rule:evenodd" d="M49,285 l-49,-95 128,0 70,-190 149,0 14,31 173,0 19,64 159,0 27,95 259,0 -37,95 -912,0z M353,95 l131,0 6,31 -129,0 -8,-31z M162,190 l545,0 -19,-64 -152,0 -20,-63 -177,0 -13,-32 -104,0 -60,159z M242,67 l1,-6 1,-4 1,-4 3,-3 2,-3 4,-2 4,-1 5,0 3,0 2,0 3,1 2,0 2,1 2,1 2,1 1,2 3,3 2,3 1,4 1,4 0,3 -1,3 0,2 -1,2 -1,2 -1,2 -1,2 -2,2 -3,2 -4,2 -4,2 -4,0 -5,0 -5,-1 -4,-2 -3,-2 -2,-3 -2,-4 -1,-4 -1,-5z ">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M49,285 l-49,-95 128,0 70,-190 149,0 14,31 173,0 19,64 159,0 27,95 259,0 -37,95 -912,0">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M353,95 l131,0 6,31 -129,0 -8,-31">
+			</path>
+			<path style="fill:none;stroke:#000;stroke-width:2" d="M162,190 l545,0 -19,-64 -152,0 -20,-63 -177,0 -13,-32 -104,0 -60,159">
+			</path>
+			<circle cx="264" cy="66" r="22" style="fill:none;stroke:#000;stroke-width:2">
+			</circle>
+		</svg>
+	</g>
+</svg>

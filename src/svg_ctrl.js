@@ -188,6 +188,10 @@ export class SVGCtrl extends MetricsPanelCtrl {
         this.buildSVG();
     }
 
+    moveElement(idx, steps) {
+        this.panel.svgBuilderData.elements = _.move(this.panel.svgBuilderData.elements, idx, idx + steps);
+    }
+
     prepareEditor() {
         var request = new XMLHttpRequest();
         
@@ -302,7 +306,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
                         let g = document.createElementNS(svgNS, 'g');
                         g.setAttribute('id', panel.svgBuilderData.elements[i].id)
                         g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y +') '+
-                                                    'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcenterx +') '+
+                                                    'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcentery +') '+
                                                     'scale(' + panel.svgBuilderData.elements[i].scale + ')');
                         svg.appendChild(g);
                         $(g).html(svgFragment.documentElement.children); 

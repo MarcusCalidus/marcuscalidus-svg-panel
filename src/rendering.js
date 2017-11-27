@@ -37,8 +37,7 @@ export default function link(scope, elem, attrs, ctrl) {
     return "<div style='font-size:" + ctrl.panel.fontSize + ";text-align:center;padding:2px;color:" + slice.color + ";'>" + label + "<br/>" + Math.round(slice.percent) + "%</div>";
   }
 
-  function addSVG() {        
-    console.log(panel.svg_data);
+  function addSVG() {
     var xml = jQuery.parseXML(panel.svg_data);
      
     for (var i = 0; i < xml.documentElement.attributes.length; i++) {
