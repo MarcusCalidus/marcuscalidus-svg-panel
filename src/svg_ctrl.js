@@ -230,7 +230,6 @@ export class SVGCtrl extends MetricsPanelCtrl {
         if (this.panel.repositories[this.panel.selectedRepository]) {
             this.panel.svglist = _.filter(this.panel.repositories[this.panel.selectedRepository].items, 
                 (item) => item.category === this.panel.selectedCategory);
-            console.log(this.panel.svglist)
         }
     }
 
