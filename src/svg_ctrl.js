@@ -36,16 +36,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
                     width: 1000,
                     height: 1000
                 },
-                elements: [{
-                    name: 'dummy',
-                    id: 'myDummy',
-                    x:    0,
-                    y:    0,
-                    rotate: 0,
-                    rcenterx: 0,
-                    rcentery: 0,
-                    scale: 1
-                }]
+                elements: []
             }
         };
 

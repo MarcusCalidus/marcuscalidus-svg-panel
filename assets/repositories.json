@@ -5,22 +5,19 @@
         "license": "MIT",
         "items" :  [
             {
-                "category": "name of the category",
+                "category": "Brand Icon",
                 "name": "algolia",
-                "path": "marcuscalidus/algolia.svg",
-                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+                "path": "marcuscalidus/algolia.svg"
             },
             {
-                "category": "name of the category",
+                "category": "Brand Icon",
                 "name": "amazon",
-                "path": "marcuscalidus/amazon.svg",
-                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+                "path": "marcuscalidus/amazon.svg"
             },
             {
-                "category": "name of the category",
+                "category": "Brand Icon",
                 "name": "amilia",
-                "path": "marcuscalidus/amilia.svg",
-                "description": "some useful hints (e.g. which groups can be used to control the SVG display)"
+                "path": "marcuscalidus/amilia.svg"
             }
         ]
     }
