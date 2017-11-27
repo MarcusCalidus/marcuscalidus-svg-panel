@@ -190,6 +190,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
 
     moveElement(idx, steps) {
         this.panel.svgBuilderData.elements = _.move(this.panel.svgBuilderData.elements, idx, idx + steps);
+        this.buildSVG();
     }
 
     prepareEditor() {

@@ -279,6 +279,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     key: 'moveElement',
                     value: function moveElement(idx, steps) {
                         this.panel.svgBuilderData.elements = _.move(this.panel.svgBuilderData.elements, idx, idx + steps);
+                        this.buildSVG();
                     }
                 }, {
                     key: 'prepareEditor',
