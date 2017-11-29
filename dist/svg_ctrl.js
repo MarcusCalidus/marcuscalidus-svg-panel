@@ -326,7 +326,6 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                             this.panel.svglist = _.filter(this.panel.repositories[this.panel.selectedRepository].items, function (item) {
                                 return item.category === _this3.panel.selectedCategory;
                             });
-                            console.log(this.panel.svglist);
                         }
                     }
                 }, {
