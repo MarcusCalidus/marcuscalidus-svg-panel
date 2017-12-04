@@ -33,12 +33,27 @@ Note that if you clone it into the grafana plugins directory you do not need to 
 if you want to place the plugin in a directory outside the standard plugins directory. Be aware that grafana-server
 needs read access to the directory.
 
-# Usage
+# Options
+
+## SVG Builder
+
+![Screenshot](img/svgBuilder.png)
+
+### Adding your own SVG repository
+
+To add your own custom SVG graphics you have to fork the original project and add them to the assets folder. If your repository is of general concern and your license allows sharing you can also add it to the panel plugin via [pull request on github](https://github.com/MarcusCalidus/grafana-svg-panel/) 
+
+## SVG Data 
+paste your svg code here. Don't forget to include a viewbox and IDs for all relevant objects. 
+
+_Note: You cannot use SVG Data editor together with the use SVG Builder option checked!_
+
+![Screenshot](img/svgData.png)
+
 ## Demos
 For a start check out the Demo-SVGs provided with the panel plugin. To load them go to the bottom of the options page and click the corresponding button
 
 ![Screenshot](img/demoButtons.png)
-
 ## Events
 ### onHandleMetric
 this code is execute upon **every Rerfresh**
@@ -77,13 +92,8 @@ s.select('#status')
 
 ![Screenshot](img/onInit.png)
 
-## SVG Data 
-paste your svg code here. Don't forget to include a viewbox and IDs for all relevant objects.
-
-![Screenshot](img/svgData.png)
-
 # Changelog
-
+## 0.0.2
+* added SVG Builder
 ## 0.0.1
-
 * Initial build
