@@ -43,6 +43,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
         _.defaults(this.panel, panelDefaults);
 
         this.events.on('render', this.onRender.bind(this));
+        this.events.on('refresh', this.onRender.bind(this));
         this.events.on('data-received', this.onDataReceived.bind(this));
         this.events.on('data-error', this.onDataError.bind(this));
         this.events.on('data-snapshot-load', this.onDataReceived.bind(this));
@@ -86,11 +87,11 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     onRender() {
-        if (!this.panel.handleMetric) {
+        if (!_.isFunction(this.panel.handleMetric)) {
             this.setHandleMetricFunction();
         }
 
-        if (!this.panel.doInit) {
+        if (!_.isFunction(this.panel.doInit)) {
             this.setInitFunction();
         }
     }

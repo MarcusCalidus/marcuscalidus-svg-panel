@@ -111,6 +111,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     _.defaults(_this.panel, panelDefaults);
 
                     _this.events.on('render', _this.onRender.bind(_this));
+                    _this.events.on('refresh', _this.onRender.bind(_this));
                     _this.events.on('data-received', _this.onDataReceived.bind(_this));
                     _this.events.on('data-error', _this.onDataError.bind(_this));
                     _this.events.on('data-snapshot-load', _this.onDataReceived.bind(_this));
@@ -163,11 +164,11 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 }, {
                     key: 'onRender',
                     value: function onRender() {
-                        if (!this.panel.handleMetric) {
+                        if (!_.isFunction(this.panel.handleMetric)) {
                             this.setHandleMetricFunction();
                         }
 
-                        if (!this.panel.doInit) {
+                        if (!_.isFunction(this.panel.doInit)) {
                             this.setInitFunction();
                         }
                     }

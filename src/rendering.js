@@ -2,6 +2,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import 'jquery.flot';
 import 'jquery.flot.pie';
+import * as SnapLib  from './node_modules/snapsvg/dist/snap.svg-min.js';
 
 export default function link(scope, elem, attrs, ctrl) {
   var panel;
@@ -38,14 +39,11 @@ export default function link(scope, elem, attrs, ctrl) {
   }
 
   function addSVG() {
-    var xml = jQuery.parseXML(panel.svg_data);
-     
-    for (var i = 0; i < xml.documentElement.attributes.length; i++) {
-        var attrib = xml.documentElement.attributes[i];
-        svgnode.setAttribute(attrib.name, attrib.value);
-	  } 
-	
-    $(svgnode).html(xml.documentElement.children); 
+    let parentSVG = SnapLib.default(svgnode);
+    parentSVG.paper.clear();
+
+    let childSVG = Snap.parse(panel.svg_data);
+    parentSVG.node.append(childSVG.node);
   } 
 
   function resizePlotCanvas() {
@@ -67,8 +65,8 @@ export default function link(scope, elem, attrs, ctrl) {
     panel = ctrl.panel;
 
     if (setElementHeight()) { 
-      if (svgelem.contentDocument) {
-      	svgnode = svgelem.contentDocument.documentElement;
+      if (svgelem) {
+      	svgnode = svgelem;
       	
       	if (svgnode.getAttribute("name") == 'isInitial') {
       	  svgnode.removeAttribute("name");

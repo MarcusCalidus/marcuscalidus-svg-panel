@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function (_export, _context) {
+System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie', './node_modules/snapsvg/dist/snap.svg-min.js'], function (_export, _context) {
   "use strict";
 
-  var _, $;
+  var _, $, SnapLib;
 
   function link(scope, elem, attrs, ctrl) {
     var panel;
@@ -41,14 +41,11 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
     }
 
     function addSVG() {
-      var xml = jQuery.parseXML(panel.svg_data);
+      var parentSVG = SnapLib.default(svgnode);
+      parentSVG.paper.clear();
 
-      for (var i = 0; i < xml.documentElement.attributes.length; i++) {
-        var attrib = xml.documentElement.attributes[i];
-        svgnode.setAttribute(attrib.name, attrib.value);
-      }
-
-      $(svgnode).html(xml.documentElement.children);
+      var childSVG = Snap.parse(panel.svg_data);
+      parentSVG.node.append(childSVG.node);
     }
 
     function resizePlotCanvas() {
@@ -70,8 +67,8 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
       panel = ctrl.panel;
 
       if (setElementHeight()) {
-        if (svgelem.contentDocument) {
-          svgnode = svgelem.contentDocument.documentElement;
+        if (svgelem) {
+          svgnode = svgelem;
 
           if (svgnode.getAttribute("name") == 'isInitial') {
             svgnode.removeAttribute("name");
@@ -103,7 +100,9 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie'], function
       _ = _lodash.default;
     }, function (_jquery) {
       $ = _jquery.default;
-    }, function (_jqueryFlot) {}, function (_jqueryFlotPie) {}],
+    }, function (_jqueryFlot) {}, function (_jqueryFlotPie) {}, function (_node_modulesSnapsvgDistSnapSvgMinJs) {
+      SnapLib = _node_modulesSnapsvgDistSnapSvgMinJs;
+    }],
     execute: function () {}
   };
 });
