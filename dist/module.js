@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['polyfills.js', 'lodash', './svg_ctrl'], function (_export, _context) {
+System.register(['./polyfills.js', 'lodash', './svg_ctrl'], function (_export, _context) {
     "use strict";
 
     var _, SVGCtrl;
