@@ -33,7 +33,7 @@ module.exports = function(grunt) {
             },
             frameworks: {
                 expand: true,
-                src: ['node_modules/snapsvg/dist/snap.svg-min.js'],
+                src: ['node_modules/snapsvg/dist/snap.svg-min.js', 'node_modules/brace/index.js'],
                 dest: 'dist',
             }
         },

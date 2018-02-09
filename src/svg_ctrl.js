@@ -5,6 +5,7 @@ import TimeSeries from 'app/core/time_series';
 import rendering from './rendering';
 import { SVGDemos } from './demos';
 import { Snap } from './node_modules/snapsvg/dist/snap.svg-min.js';
+import ace from './node_modules/brace/index.js';
 
 export class SVGCtrl extends MetricsPanelCtrl {
 
@@ -59,6 +60,35 @@ export class SVGCtrl extends MetricsPanelCtrl {
         this.addEditorTab('Events', 'public/plugins/grafana-svg-panel/editor_events.html', 4);
         this.prepareEditor();
         this.unitFormats = kbn.getUnitFormats();
+    }
+    
+    doshow() {
+        setTimeout(function() {
+              //  var langTools = ace.acequire("./node_modules/brace/ext/language_tools");
+      console.log(ace);
+      var editor = ace.edit("editor");
+      editor.getSession().on('change', function() {
+        var val = editor.getSession().getValue();
+        console.log(val);
+        });
+   /*   editor.setOptions({enableBasicAutocompletion: true});
+      // uses http://rhymebrain.com/api.html
+     var rhymeCompleter = {
+          getCompletions: function(editor, session, pos, prefix, callback) {
+              if (prefix.length === 0) { callback(null, []); return }
+              $.getJSON(
+                  "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
+                  function(wordList) {
+                      // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
+                      callback(null, wordList.map(function(ea) {
+                          return {name: ea.word, value: ea.word, score: ea.score, meta: "rhyme"}
+                      }));
+                  })
+          }
+      }
+      langTools.addCompleter(rhymeCompleter);*/
+        }.bind(this), 100)
+        return true;
     }
 
     setUnitFormat(subItem) {
