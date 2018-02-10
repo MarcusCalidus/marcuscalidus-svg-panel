@@ -4,7 +4,9 @@
 		<p ng-if="ctrl.panel.useSVGBuilder">
 			SVG source cannot be edited while SVG Builder option is checked.
 		</p>
-		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-readonly="ctrl.panel.useSVGBuilder" ng-model="ctrl.panel.svg_data" ng-change="ctrl.resetSVG(); ctrl.render();"></textarea>
+
+		<div id="svg_data" ng-show="ctrl.doShowAceSvg('svg_data')" style="height: 500px; width: 100%; margin-top: 8px;"></div>
+		<!--textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-readonly="ctrl.panel.useSVGBuilder" ng-model="ctrl.panel.svg_data" ng-change="ctrl.resetSVG(); ctrl.render();"></textarea-->
 </div>
 <p></p>
 <div class="editor-row">

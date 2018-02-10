@@ -38,8 +38,10 @@ module.exports = function(grunt) {
                     'node_modules/brace/index.js',
                     'node_modules/brace/ext/language_tools.js',
                     'node_modules/brace/mode/javascript.js',
+                    'node_modules/brace/mode/svg.js',
                     'node_modules/brace/worker/javascript.js',
-                    'node_modules/brace/theme/ambiance.js'
+                    'node_modules/brace/worker/xml.js',
+                    'node_modules/brace/theme/tomorrow_night_bright.js'
                 ],
                 dest: 'dist',
             }

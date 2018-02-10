@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './node_modules/snapsvg/dist/snap.svg-min.js', './node_modules/brace/index.js', './node_modules/brace/ext/language_tools.js', './node_modules/brace/theme/ambiance.js', './node_modules/brace/mode/javascript.js'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './node_modules/snapsvg/dist/snap.svg-min.js', './node_modules/brace/index.js', './node_modules/brace/ext/language_tools.js', './node_modules/brace/theme/tomorrow_night_bright.js', './node_modules/brace/mode/javascript.js', './node_modules/brace/mode/svg.js'], function (_export, _context) {
     "use strict";
 
     var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, ace, _createClass, SVGCtrl;
@@ -52,7 +52,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             Snap = _node_modulesSnapsvgDistSnapSvgMinJs.Snap;
         }, function (_node_modulesBraceIndexJs) {
             ace = _node_modulesBraceIndexJs.default;
-        }, function (_node_modulesBraceExtLanguage_toolsJs) {}, function (_node_modulesBraceThemeAmbianceJs) {}, function (_node_modulesBraceModeJavascriptJs) {}],
+        }, function (_node_modulesBraceExtLanguage_toolsJs) {}, function (_node_modulesBraceThemeTomorrow_night_brightJs) {}, function (_node_modulesBraceModeJavascriptJs) {}, function (_node_modulesBraceModeSvgJs) {}],
         execute: function () {
             _createClass = function () {
                 function defineProperties(target, props) {
@@ -121,6 +121,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
                     _this.demos = new SVGDemos(_this);
                     _this.initialized = 0;
+                    _this.editors = {};
                     return _this;
                 }
 
@@ -135,35 +136,59 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                         this.aceLangTools = ace.acequire("ace/ext/language_tools");
                     }
                 }, {
-                    key: 'doShowAce',
-                    value: function doShowAce(nodeId) {
+                    key: 'doShowAceJs',
+                    value: function doShowAceJs(nodeId) {
                         setTimeout(function () {
                             if ($('#' + nodeId).length === 1) {
-                                var editor = ace.edit(nodeId);
+                                this.editors[nodeId] = ace.edit(nodeId);
                                 $('#' + nodeId).attr('id', nodeId + '_initialized');
-                                editor.setValue(this.panel[nodeId], 1);
-                                editor.getSession().on('change', function () {
-                                    var val = editor.getSession().getValue();
+                                this.editors[nodeId].setValue(this.panel[nodeId], 1);
+                                this.editors[nodeId].getSession().on('change', function () {
+                                    var val = this.editors[nodeId].getSession().getValue();
                                     this.panel[nodeId] = val;
-                                    this.$scope.$digest();
                                     try {
                                         this.setInitFunction();
                                         this.setHandleMetricFunction();
                                         this.render();
                                     } catch (err) {
-                                        editor.getSession().setAnnotations([{
-                                            row: 1,
-                                            column: 0,
-                                            text: err, // Or the Json reply from the parser 
-                                            type: "error" // also warning and information
-                                        }]);
+                                        console.error(err);
                                     }
                                 }.bind(this));
-                                editor.setOptions({
+                                this.editors[nodeId].setOptions({
                                     enableBasicAutocompletion: true,
                                     enableLiveAutocompletion: true,
-                                    theme: 'ace/theme/ambiance',
+                                    theme: 'ace/theme/tomorrow_night_bright',
                                     mode: 'ace/mode/javascript',
+                                    showPrintMargin: false
+                                });
+                            }
+                        }.bind(this), 100);
+                        return true;
+                    }
+                }, {
+                    key: 'doShowAceSvg',
+                    value: function doShowAceSvg(nodeId) {
+                        setTimeout(function () {
+                            if ($('#' + nodeId).length === 1) {
+                                this.editors[nodeId] = ace.edit(nodeId);
+                                $('#' + nodeId).attr('id', nodeId + '_initialized');
+                                this.editors[nodeId].setValue(this.panel[nodeId], 1);
+                                this.editors[nodeId].getSession().on('change', function () {
+                                    var val = this.editors[nodeId].getSession().getValue();
+                                    this.panel[nodeId] = val;
+                                    try {
+                                        this.resetSVG();
+                                        this.render();
+                                    } catch (err) {
+                                        console.error(err);
+                                    }
+                                }.bind(this));
+                                this.editors[nodeId].setOptions({
+                                    enableBasicAutocompletion: true,
+                                    enableLiveAutocompletion: true,
+                                    readOnly: this.panel.useSVGBuilder,
+                                    theme: 'ace/theme/tomorrow_night_bright',
+                                    mode: 'ace/mode/svg',
                                     showPrintMargin: false
                                 });
                             }
