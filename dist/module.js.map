@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/module.js"],"names":["_","SVGCtrl"],"mappings":";;;;;;;;;AAAOA,O;;AACCC,a,aAAAA,O;;;2BAGNA,O","file":"module.js","sourcesContent":["import _ from 'lodash';\nimport {SVGCtrl} from './svg_ctrl';\n\nexport {\n  SVGCtrl as PanelCtrl\n};\n\n"]}
+{"version":3,"sources":["../src/module.js"],"names":["_","SVGCtrl"],"mappings":";;;;;;;;;AACOA,a;;AACEC,mB,aAAAA,O;;;iCAGLA,O","file":"module.js","sourcesContent":["import './polyfills.js';\nimport _ from 'lodash';\nimport { SVGCtrl } from './svg_ctrl';\n\nexport {\n    SVGCtrl as PanelCtrl\n};"]}
