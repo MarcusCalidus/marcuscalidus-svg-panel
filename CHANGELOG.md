@@ -1,3 +1,5 @@
+## 0.0.5
+- ace editor for code and SVG editing
 ## 0.0.4
 - panel now runs smoothly in IE11 (added neccessary polyfill)
 ## 0.0.3
