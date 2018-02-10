@@ -132,24 +132,39 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                         this.addEditorTab('Events', 'public/plugins/grafana-svg-panel/editor_events.html', 4);
                         this.prepareEditor();
                         this.unitFormats = kbn.getUnitFormats();
+                        this.aceLangTools = ace.acequire("ace/ext/language_tools");
                     }
                 }, {
-                    key: 'doshow',
-                    value: function doshow(nodeId) {
+                    key: 'doShowAce',
+                    value: function doShowAce(nodeId) {
                         setTimeout(function () {
                             if ($('#' + nodeId).length === 1) {
-                                var langTools = ace.acequire("ace/ext/language_tools");
                                 var editor = ace.edit(nodeId);
-                                $('#' + nodeId).attr('id', '');
+                                $('#' + nodeId).attr('id', nodeId + '_initialized');
+                                editor.setValue(this.panel[nodeId], 1);
                                 editor.getSession().on('change', function () {
                                     var val = editor.getSession().getValue();
-                                    //     console.log(val);
-                                });
+                                    this.panel[nodeId] = val;
+                                    this.$scope.$digest();
+                                    try {
+                                        this.setInitFunction();
+                                        this.setHandleMetricFunction();
+                                        this.render();
+                                    } catch (err) {
+                                        editor.getSession().setAnnotations([{
+                                            row: 1,
+                                            column: 0,
+                                            text: err, // Or the Json reply from the parser 
+                                            type: "error" // also warning and information
+                                        }]);
+                                    }
+                                }.bind(this));
                                 editor.setOptions({
                                     enableBasicAutocompletion: true,
                                     enableLiveAutocompletion: true,
                                     theme: 'ace/theme/ambiance',
-                                    mode: 'ace/mode/javascript'
+                                    mode: 'ace/mode/javascript',
+                                    showPrintMargin: false
                                 });
                             }
                         }.bind(this), 100);

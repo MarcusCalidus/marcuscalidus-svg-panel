@@ -5,7 +5,7 @@
 		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
 		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
 		</ul>
-		<div id="editorHandleMetric" ng-bind="ctrl.panel.js_code" ng-show="ctrl.doshow('editorHandleMetric')" style="height: 500px; width: 100%;"></div>
+		<div id="js_code" ng-show="ctrl.doShowAce('js_code')" style="height: 500px; width: 100%; margin-top: 8px;"></div>
 
 		<!--textarea id="editor2" class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea-->
 </div>
@@ -18,7 +18,7 @@
 		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
 		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
 		</ul>
-		<div id="editorInit" ng-bind="ctrl.panel.js_init_code" ng-show="ctrl.doshow('editorInit')" style="height: 500px; width: 100%;">Type in a word like "will" below and press ctrl+space or alt+space to get "rhyme completion"</div>
+		<div id="js_init_code" ng-show="ctrl.doShowAce('js_init_code')" style="height: 500px; width: 100%; margin-top: 8px;">Type in a word like "will" below and press ctrl+space or alt+space to get "rhyme completion"</div>
 
 		<!--textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_init_code" ng-change="ctrl.setInitFunction(); ctrl.render();"></textarea-->
 </div>
