@@ -1,7 +1,3 @@
-
-<div class="editor-row">
-	<div id="editor" ng-show="ctrl.doshow()" style="height: 500px; width: 800px">Type in a word like "will" below and press ctrl+space or alt+space to get "rhyme completion"</div>
-</div>
 <div class="editor-row">
 		<h5 class="section-heading">JavaScript Code: <code>onHandleMetric(ctrl, svgnode)</code></h5>
 		<ul style="padding-left: 40px;">
@@ -9,7 +5,9 @@
 		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
 		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
 		</ul>
-		<textarea id="editor2" class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea>
+		<div id="editorHandleMetric" ng-bind="ctrl.panel.js_code" ng-show="ctrl.doshow('editorHandleMetric')" style="height: 500px; width: 100%;"></div>
+
+		<!--textarea id="editor2" class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_code" ng-change="ctrl.setHandleMetricFunction(); ctrl.render();"></textarea-->
 </div>
 
 <div class="editor-row">
@@ -20,5 +18,7 @@
 		<li>@param&emsp;{MetricsPanelCtrl}&emsp;ctrl&emsp;Instance of current grafana panel object.</li>
 		<li>@param&emsp;{HTMLElement}&emsp;svgnode&emsp;Html DOM node containing svg data.</li>
 		</ul>
-		<textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_init_code" ng-change="ctrl.setInitFunction(); ctrl.render();"></textarea>
+		<div id="editorInit" ng-bind="ctrl.panel.js_init_code" ng-show="ctrl.doshow('editorInit')" style="height: 500px; width: 100%;">Type in a word like "will" below and press ctrl+space or alt+space to get "rhyme completion"</div>
+
+		<!--textarea class="gf-form-input ng-not-empty" style="font-family:'Courier New', Courier, monospace;min-height: 500px" ng-model="ctrl.panel.js_init_code" ng-change="ctrl.setInitFunction(); ctrl.render();"></textarea-->
 </div>

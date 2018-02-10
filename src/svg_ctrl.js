@@ -6,6 +6,9 @@ import rendering from './rendering';
 import { SVGDemos } from './demos';
 import { Snap } from './node_modules/snapsvg/dist/snap.svg-min.js';
 import ace from './node_modules/brace/index.js';
+import './node_modules/brace/ext/language_tools.js';
+import './node_modules/brace/theme/ambiance.js';
+import './node_modules/brace/mode/javascript.js';
 
 export class SVGCtrl extends MetricsPanelCtrl {
 
@@ -62,32 +65,24 @@ export class SVGCtrl extends MetricsPanelCtrl {
         this.unitFormats = kbn.getUnitFormats();
     }
     
-    doshow() {
+    doshow(nodeId) {
         setTimeout(function() {
-              //  var langTools = ace.acequire("./node_modules/brace/ext/language_tools");
-      console.log(ace);
-      var editor = ace.edit("editor");
-      editor.getSession().on('change', function() {
-        var val = editor.getSession().getValue();
-        console.log(val);
-        });
-   /*   editor.setOptions({enableBasicAutocompletion: true});
-      // uses http://rhymebrain.com/api.html
-     var rhymeCompleter = {
-          getCompletions: function(editor, session, pos, prefix, callback) {
-              if (prefix.length === 0) { callback(null, []); return }
-              $.getJSON(
-                  "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
-                  function(wordList) {
-                      // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
-                      callback(null, wordList.map(function(ea) {
-                          return {name: ea.word, value: ea.word, score: ea.score, meta: "rhyme"}
-                      }));
-                  })
-          }
-      }
-      langTools.addCompleter(rhymeCompleter);*/
-        }.bind(this), 100)
+            if ($('#'+nodeId).length === 1) {
+                var langTools = ace.acequire("ace/ext/language_tools");
+                var editor = ace.edit(nodeId);
+                $('#'+nodeId).attr('id', '');
+                editor.getSession().on('change', function() {
+                    var val = editor.getSession().getValue();
+               //     console.log(val);
+                });
+                editor.setOptions({
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    theme: 'ace/theme/ambiance',
+                    mode: 'ace/mode/javascript'
+                });
+            }
+        }.bind(this), 100);
         return true;
     }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './node_modules/snapsvg/dist/snap.svg-min.js', './node_modules/brace/index.js'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './node_modules/snapsvg/dist/snap.svg-min.js', './node_modules/brace/index.js', './node_modules/brace/ext/language_tools.js', './node_modules/brace/theme/ambiance.js', './node_modules/brace/mode/javascript.js'], function (_export, _context) {
     "use strict";
 
     var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, ace, _createClass, SVGCtrl;
@@ -52,7 +52,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             Snap = _node_modulesSnapsvgDistSnapSvgMinJs.Snap;
         }, function (_node_modulesBraceIndexJs) {
             ace = _node_modulesBraceIndexJs.default;
-        }],
+        }, function (_node_modulesBraceExtLanguage_toolsJs) {}, function (_node_modulesBraceThemeAmbianceJs) {}, function (_node_modulesBraceModeJavascriptJs) {}],
         execute: function () {
             _createClass = function () {
                 function defineProperties(target, props) {
@@ -135,31 +135,23 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     }
                 }, {
                     key: 'doshow',
-                    value: function doshow() {
+                    value: function doshow(nodeId) {
                         setTimeout(function () {
-                            //  var langTools = ace.acequire("./node_modules/brace/ext/language_tools");
-                            console.log(ace);
-                            var editor = ace.edit("editor");
-                            editor.getSession().on('change', function () {
-                                var val = editor.getSession().getValue();
-                                console.log(val);
-                            });
-                            /*   editor.setOptions({enableBasicAutocompletion: true});
-                               // uses http://rhymebrain.com/api.html
-                              var rhymeCompleter = {
-                                   getCompletions: function(editor, session, pos, prefix, callback) {
-                                       if (prefix.length === 0) { callback(null, []); return }
-                                       $.getJSON(
-                                           "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
-                                           function(wordList) {
-                                               // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
-                                               callback(null, wordList.map(function(ea) {
-                                                   return {name: ea.word, value: ea.word, score: ea.score, meta: "rhyme"}
-                                               }));
-                                           })
-                                   }
-                               }
-                               langTools.addCompleter(rhymeCompleter);*/
+                            if ($('#' + nodeId).length === 1) {
+                                var langTools = ace.acequire("ace/ext/language_tools");
+                                var editor = ace.edit(nodeId);
+                                $('#' + nodeId).attr('id', '');
+                                editor.getSession().on('change', function () {
+                                    var val = editor.getSession().getValue();
+                                    //     console.log(val);
+                                });
+                                editor.setOptions({
+                                    enableBasicAutocompletion: true,
+                                    enableLiveAutocompletion: true,
+                                    theme: 'ace/theme/ambiance',
+                                    mode: 'ace/mode/javascript'
+                                });
+                            }
                         }.bind(this), 100);
                         return true;
                     }
