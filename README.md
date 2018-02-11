@@ -93,6 +93,9 @@ s.select('#status')
 ![Screenshot](img/onInit.png)
 
 # Changelog
+## 0.1.0
+- BREAKING: plugin was renamed marcuscalidus-svg-panel in line with http://docs.grafana.org/plugins/developing/code-styleguide/
+  please adjust paths of your checked out repository manually
 ## 0.0.5
 * ace editor for code editing
 ## 0.0.4
