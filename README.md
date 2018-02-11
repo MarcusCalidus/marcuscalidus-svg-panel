@@ -1,7 +1,7 @@
 # Summary
 Grafana panel for displaying metric sensitive SVG images using the snap svg library ([http://snapsvg.io/](http://snapsvg.io/)).
 
-You need the lastest grafana build for Grafana 3.0 to enable plugin support. You can get it here : http://grafana.org/download/builds.html
+You need the latest grafana build for Grafana 3.0 to enable plugin support. You can get it here : http://grafana.org/download/builds.html
 
 # Example
 
