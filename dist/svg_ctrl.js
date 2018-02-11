@@ -128,9 +128,9 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 _createClass(SVGCtrl, [{
                     key: 'onInitEditMode',
                     value: function onInitEditMode() {
-                        this.addEditorTab('SVG Builder', 'public/plugins/grafana-svg-panel/editor_builder.html', 2);
-                        this.addEditorTab('SVG', 'public/plugins/grafana-svg-panel/editor_svg.html', 3);
-                        this.addEditorTab('Events', 'public/plugins/grafana-svg-panel/editor_events.html', 4);
+                        this.addEditorTab('SVG Builder', 'public/plugins/marcuscalidus-svg-panel/editor_builder.html', 2);
+                        this.addEditorTab('SVG', 'public/plugins/marcuscalidus-svg-panel/editor_svg.html', 3);
+                        this.addEditorTab('Events', 'public/plugins/marcuscalidus-svg-panel/editor_events.html', 4);
                         this.prepareEditor();
                         this.unitFormats = kbn.getUnitFormats();
                         this.aceLangTools = ace.acequire("ace/ext/language_tools");
@@ -353,7 +353,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
                         var request = new XMLHttpRequest();
 
-                        request.open("GET", "public/plugins/grafana-svg-panel/assets/repositories.json");
+                        request.open("GET", "public/plugins/marcuscalidus-svg-panel/assets/repositories.json");
                         request.addEventListener('load', function (event) {
                             if (request.status >= 200 && request.status < 300) {
                                 _this2.panel.repositories = JSON.parse(request.responseText);
@@ -454,7 +454,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                             panel.svgBuilderData.elements.forEach(function (element) {
                                 promises.push(function () {
                                     return $.Deferred(function (dfd) {
-                                        $.get('public/plugins/grafana-svg-panel/assets/' + element.path, function (data) {
+                                        $.get('public/plugins/marcuscalidus-svg-panel/assets/' + element.path, function (data) {
                                             dfd.resolve(data);
                                         });
                                     }).promise();

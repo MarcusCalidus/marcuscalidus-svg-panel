@@ -1,13 +1,13 @@
 {
     "type": "panel",
     "name": "SVG",
-    "id": "grafana-svg-panel",
+    "id": "marcuscalidus-svg-panel",
 
     "info": {
         "description": "SVG panel for grafana",
         "author": {
             "name": "MarcusCalidus@gmail.com",
-            "url": "https://github.com/MarcusCalidus/grafana-svg-panel"
+            "url": "https://github.com/MarcusCalidus/marcuscalidus-svg-panel"
         },
         "keywords": ["svg", "panel"],
         "logos": {
@@ -17,7 +17,7 @@
         "links": [
             { "name": "Snap.svg", "url": "http://snapsvg.io/" },
             { "name": "MIT License", "url": "https://github.com/grafana/piechart-panel/blob/master/LICENSE" },
-            { "name": "Project", "url": "https://github.com/MarcusCalidus/grafana-svg-panel" }
+            { "name": "Project", "url": "https://github.com/MarcusCalidus/marcuscalidus-svg-panel" }
         ],
         "screenshots": [
             { "name": "In Action", "path": "img/inAction.png" },

@@ -1,11 +1,11 @@
 {
-    "name": "grafana-svg-panel",
+    "name": "marcuscalidus-svg-panel",
     "private": true,
     "version": "0.0.5",
     "description": "",
     "repository": {
         "type": "git",
-        "url": "git+https://jira.birkenstock.com/bitbucket/scm/panda/grafana-svg-panel.git"
+        "url": "https://github.com/MarcusCalidus/marcuscalidus-svg-panel.git"
     },
     "scripts": {
         "build": "grunt",

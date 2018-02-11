@@ -41,7 +41,7 @@ needs read access to the directory.
 
 ### Adding your own SVG repository
 
-To add your own custom SVG graphics you have to fork the original project and add them to the assets folder. If your repository is of general concern and your license allows sharing you can also add it to the panel plugin via [pull request on github](https://github.com/MarcusCalidus/grafana-svg-panel/) 
+To add your own custom SVG graphics you have to fork the original project and add them to the assets folder. If your repository is of general concern and your license allows sharing you can also add it to the panel plugin via [pull request on github](https://github.com/MarcusCalidus/marcuscalidus-svg-panel/) 
 
 ## SVG Data 
 paste your svg code here. Don't forget to include a viewbox and IDs for all relevant objects. 

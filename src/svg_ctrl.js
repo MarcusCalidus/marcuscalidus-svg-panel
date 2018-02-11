@@ -60,9 +60,9 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     onInitEditMode() {
-        this.addEditorTab('SVG Builder', 'public/plugins/grafana-svg-panel/editor_builder.html', 2);
-        this.addEditorTab('SVG', 'public/plugins/grafana-svg-panel/editor_svg.html', 3);
-        this.addEditorTab('Events', 'public/plugins/grafana-svg-panel/editor_events.html', 4);
+        this.addEditorTab('SVG Builder', 'public/plugins/marcuscalidus-svg-panel/editor_builder.html', 2);
+        this.addEditorTab('SVG', 'public/plugins/marcuscalidus-svg-panel/editor_svg.html', 3);
+        this.addEditorTab('Events', 'public/plugins/marcuscalidus-svg-panel/editor_events.html', 4);
         this.prepareEditor();
         this.unitFormats = kbn.getUnitFormats();
         this.aceLangTools = ace.acequire("ace/ext/language_tools");
@@ -264,7 +264,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
     prepareEditor() {
         var request = new XMLHttpRequest();
         
-        request.open("GET","public/plugins/grafana-svg-panel/assets/repositories.json");
+        request.open("GET","public/plugins/marcuscalidus-svg-panel/assets/repositories.json");
         request.addEventListener('load', (event) => {
            if (request.status >= 200 && request.status < 300) {
               this.panel.repositories = JSON.parse(request.responseText);
@@ -361,7 +361,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
             panel.svgBuilderData.elements.forEach((element) => {
                 promises.push(() => {
                     return $.Deferred((dfd) => {
-                        $.get('public/plugins/grafana-svg-panel/assets/' + element.path, (data) => {
+                        $.get('public/plugins/marcuscalidus-svg-panel/assets/' + element.path, (data) => {
                            dfd.resolve(data);
                         });
                     }).promise();

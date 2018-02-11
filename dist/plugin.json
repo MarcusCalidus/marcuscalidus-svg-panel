@@ -1,7 +1,7 @@
 {
     "type": "panel",
     "name": "SVG",
-    "id": "grafana-svg-panel",
+    "id": "marcuscalidus-svg-panel",
 
     "info": {
         "description": "SVG panel for grafana",
