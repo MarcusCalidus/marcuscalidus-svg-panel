@@ -5,7 +5,7 @@ You need the latest grafana build for Grafana 3.0 to enable plugin support. You 
 
 # Example
 
-![Screenshot](img/inAction.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/inAction.png)
 
 ## Installation
 
@@ -37,7 +37,7 @@ needs read access to the directory.
 
 ## SVG Builder
 
-![Screenshot](img/svgBuilder.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/svgBuilder.png)
 
 ### Adding your own SVG repository
 
@@ -48,12 +48,12 @@ paste your svg code here. Don't forget to include a viewbox and IDs for all rele
 
 _Note: You cannot use SVG Data editor together with the use SVG Builder option checked!_
 
-![Screenshot](img/svgData.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/svgData.png)
 
 ## Demos
 For a start check out the Demo-SVGs provided with the panel plugin. To load them go to the bottom of the options page and click the corresponding button
 
-![Screenshot](img/demoButtons.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/demoButtons.png)
 ## Events
 ### onHandleMetric
 this code is execute upon **every Rerfresh**
@@ -72,7 +72,7 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
-![Screenshot](img/onHandleMetric.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onHandleMetric.png)
 
 ### onInit
 this event is executed **once**, right after the first initializiation of the SVG.
@@ -90,7 +90,7 @@ var s = Snap(svgnode);
 s.select('#status')
 ```
 
-![Screenshot](img/onInit.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onInit.png)
 
 # Changelog
 ## 0.1.0
