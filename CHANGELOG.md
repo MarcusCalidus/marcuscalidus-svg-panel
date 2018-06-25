@@ -1,7 +1,7 @@
 # 0.1.1
 - now includes JavaScript code completion for the objects this, ctrl and svgnode.
 
-![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/codeCompletion0.1.1.png)
+![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/codeCompletion_0.1.1.png)
 
 # 0.1.0
 - BREAKING: plugin was renamed marcuscalidus-svg-panel in line with http://docs.grafana.org/plugins/developing/code-styleguide/
