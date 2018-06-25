@@ -11,6 +11,81 @@ import './node_modules/brace/theme/tomorrow_night_bright.js';
 import './node_modules/brace/mode/javascript.js';
 import './node_modules/brace/mode/svg.js';
 
+
+class GrafanaJSCompleter {
+    constructor($lang_tools, $control, $panel) {
+        this.$lang_tools = $lang_tools;
+        this.$control = $control;
+        this.$panel = $panel;
+    }
+
+    getCompletions(editor, session, pos, prefix, callback) {
+        var pos = editor.getCursorPosition();
+        var line = editor.session.getLine(pos.row);
+
+        prefix = line.substring(0, pos.column).match(/this\.\S*/g);
+        if (prefix) {
+            prefix = prefix[prefix.length - 1];
+            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+            var panelthis = this.$panel;
+            var evalObj = eval('panel' + prefix);
+            this.evaluatePrefix(evalObj, callback);
+            return;
+        }
+
+        prefix = line.substring(0, pos.column).match(/ctrl\.\S*/g);
+        if (prefix) {
+            prefix = prefix[prefix.length - 1];
+            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+            var ctrl = this.$control;
+            var evalObj = eval(prefix);
+            this.evaluatePrefix(evalObj, callback);
+            return;
+        }
+
+        prefix = line.substring(0, pos.column).match(/svgnode\.\S*/g);
+        if (prefix) {
+            prefix = prefix[prefix.length - 1];
+            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+            var svgnode = document.querySelector('.svg-object');
+            var evalObj = eval(prefix);
+            this.evaluatePrefix(evalObj, callback);
+            return;
+        }
+
+        if (prefix == '') {
+            var wordList = ['ctrl', 'svgnode', 'this'];
+
+            callback(null, wordList.map(function(word) {
+                return {
+                    caption: word,
+                    value: word,
+                    meta: 'Grafana keyword'
+                };
+            }));
+        }
+    }
+
+    evaluatePrefix(evalObj, callback) {
+        var wordList = [];
+        for (var key in evalObj) {
+            wordList.push(key);
+        }
+        callback(null, wordList.map(function(word) {
+            return {
+                caption: word + ': ' + (Array.isArray(evalObj[word]) ? 'Array[' + (evalObj[word] || []).length + ']' : typeof evalObj[word]),
+                value: word,
+                meta: "Grafana keyword"
+            };
+        }));
+        return;
+    }
+}
+
+
 export class SVGCtrl extends MetricsPanelCtrl {
 
     constructor($scope, $injector, $rootScope) {
@@ -35,7 +110,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
             svgBuilderData: {
                 width: '100%',
                 height: '100%',
-                viewport : {
+                viewport: {
                     x: 0,
                     y: 0,
                     width: 1000,
@@ -66,27 +141,28 @@ export class SVGCtrl extends MetricsPanelCtrl {
         this.prepareEditor();
         this.unitFormats = kbn.getUnitFormats();
         this.aceLangTools = ace.acequire("ace/ext/language_tools");
+
+        this.aceLangTools.addCompleter(new GrafanaJSCompleter(this.aceLangTools, this, this.panel));
     }
-    
+
     doShowAceJs(nodeId) {
         setTimeout(function() {
-            if ($('#'+nodeId).length === 1) {
+            if ($('#' + nodeId).length === 1) {
                 this.editors[nodeId] = ace.edit(nodeId);
-                $('#'+nodeId).attr('id', nodeId + '_initialized');
-                this.editors[nodeId] .setValue(this.panel[nodeId], 1);
-                this.editors[nodeId] .getSession().on('change', function() {
-                    var val = this.editors[nodeId] .getSession().getValue();
+                $('#' + nodeId).attr('id', nodeId + '_initialized');
+                this.editors[nodeId].setValue(this.panel[nodeId], 1);
+                this.editors[nodeId].getSession().on('change', function() {
+                    var val = this.editors[nodeId].getSession().getValue();
                     this.panel[nodeId] = val;
                     try {
-                      this.setInitFunction();
-                      this.setHandleMetricFunction(); 
-                      this.render();
-                    }
-                    catch (err) {
+                        this.setInitFunction();
+                        this.setHandleMetricFunction();
+                        this.render();
+                    } catch (err) {
                         console.error(err);
                     }
                 }.bind(this));
-                this.editors[nodeId] .setOptions({
+                this.editors[nodeId].setOptions({
                     enableBasicAutocompletion: true,
                     enableLiveAutocompletion: true,
                     theme: 'ace/theme/tomorrow_night_bright',
@@ -100,22 +176,21 @@ export class SVGCtrl extends MetricsPanelCtrl {
 
     doShowAceSvg(nodeId) {
         setTimeout(function() {
-            if ($('#'+nodeId).length === 1) {
-                this.editors[nodeId]  = ace.edit(nodeId);
-                $('#'+nodeId).attr('id', nodeId + '_initialized');
+            if ($('#' + nodeId).length === 1) {
+                this.editors[nodeId] = ace.edit(nodeId);
+                $('#' + nodeId).attr('id', nodeId + '_initialized');
                 this.editors[nodeId].setValue(this.panel[nodeId], 1);
                 this.editors[nodeId].getSession().on('change', function() {
                     var val = this.editors[nodeId].getSession().getValue();
                     this.panel[nodeId] = val;
                     try {
-                      this.resetSVG();
-                      this.render();
-                    }
-                    catch (err) {
+                        this.resetSVG();
+                        this.render();
+                    } catch (err) {
                         console.error(err);
                     }
                 }.bind(this));
-                this.editors[nodeId] .setOptions({
+                this.editors[nodeId].setOptions({
                     enableBasicAutocompletion: true,
                     enableLiveAutocompletion: true,
                     readOnly: this.panel.useSVGBuilder,
@@ -263,14 +338,14 @@ export class SVGCtrl extends MetricsPanelCtrl {
 
     prepareEditor() {
         var request = new XMLHttpRequest();
-        
-        request.open("GET","public/plugins/marcuscalidus-svg-panel/assets/repositories.json");
+
+        request.open("GET", "public/plugins/marcuscalidus-svg-panel/assets/repositories.json");
         request.addEventListener('load', (event) => {
-           if (request.status >= 200 && request.status < 300) {
-              this.panel.repositories = JSON.parse(request.responseText);
-           } else {
-              console.warn(request.statusText, request.responseText);
-           }
+            if (request.status >= 200 && request.status < 300) {
+                this.panel.repositories = JSON.parse(request.responseText);
+            } else {
+                console.warn(request.statusText, request.responseText);
+            }
         });
         request.send();
     }
@@ -278,14 +353,14 @@ export class SVGCtrl extends MetricsPanelCtrl {
     repositorySelected() {
         let newCategories = [];
         this.panel.selectedSVG = null;
-        
+
         if (this.panel.repositories[this.panel.selectedRepository]) {
-            _.forEach(this.panel.repositories[this.panel.selectedRepository].items, 
+            _.forEach(this.panel.repositories[this.panel.selectedRepository].items,
                 (item) => {
                     if (!_.includes(newCategories, item.category)) {
                         newCategories.push(item.category);
-                }
-            })
+                    }
+                })
         }
 
         this.panel.categories = newCategories;
@@ -296,7 +371,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
         this.panel.selectedSVG = null;
 
         if (this.panel.repositories[this.panel.selectedRepository]) {
-            this.panel.svglist = _.filter(this.panel.repositories[this.panel.selectedRepository].items, 
+            this.panel.svglist = _.filter(this.panel.repositories[this.panel.selectedRepository].items,
                 (item) => item.category === this.panel.selectedCategory);
         }
     }
@@ -304,42 +379,41 @@ export class SVGCtrl extends MetricsPanelCtrl {
     addSVGItem() {
         let svg = JSON.parse(this.panel.selectedSVG);
 
-        this.panel.svgBuilderData.elements.push(
-            {
-                name: svg.name, 
-                id: svg.name,
-                path: svg.path,
-                x: 0,
-                y: 0,
-                rotate: 0,
-                rcenterx: 0,
-                rcentery: 0,
-                scale: 1
-            }
-        )
+        this.panel.svgBuilderData.elements.push({
+            name: svg.name,
+            id: svg.name,
+            path: svg.path,
+            x: 0,
+            y: 0,
+            rotate: 0,
+            rcenterx: 0,
+            rcentery: 0,
+            scale: 1
+        })
         this.buildSVG();
     }
 
     buildSVG() {
-        var all = function(array){
+        var all = function(array) {
             var deferred = $.Deferred();
-            var fulfilled = 0, length = array.length;
+            var fulfilled = 0,
+                length = array.length;
             var results = [];
-        
+
             if (length === 0) {
                 deferred.resolve(results);
             } else {
-                array.forEach(function(promise, i){
+                array.forEach(function(promise, i) {
                     $.when(promise()).then(function(value) {
                         results[i] = value;
                         fulfilled++;
-                        if(fulfilled === length){
+                        if (fulfilled === length) {
                             deferred.resolve(results);
                         }
                     });
                 });
             }
-        
+
             return deferred.promise();
         };
 
@@ -351,18 +425,18 @@ export class SVGCtrl extends MetricsPanelCtrl {
             svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
             svg.setAttribute('width', panel.svgBuilderData.width);
             svg.setAttribute('height', panel.svgBuilderData.height);
-            svg.setAttribute('viewBox',  panel.svgBuilderData.viewport.x + ' ' +
-                                        panel.svgBuilderData.viewport.y + ' ' +
-                                        panel.svgBuilderData.viewport.width + ' ' +
-                                        panel.svgBuilderData.viewport.height);
-            
+            svg.setAttribute('viewBox', panel.svgBuilderData.viewport.x + ' ' +
+                panel.svgBuilderData.viewport.y + ' ' +
+                panel.svgBuilderData.viewport.width + ' ' +
+                panel.svgBuilderData.viewport.height);
+
             let promises = [];
 
             panel.svgBuilderData.elements.forEach((element) => {
                 promises.push(() => {
                     return $.Deferred((dfd) => {
                         $.get('public/plugins/marcuscalidus-svg-panel/assets/' + element.path, (data) => {
-                           dfd.resolve(data);
+                            dfd.resolve(data);
                         });
                     }).promise();
                 });
@@ -373,11 +447,11 @@ export class SVGCtrl extends MetricsPanelCtrl {
                     (svgFragment, i) => {
                         let g = document.createElementNS(svgNS, 'g');
                         g.setAttribute('id', panel.svgBuilderData.elements[i].id)
-                        g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y +') '+
-                                                    'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcentery +') '+
-                                                    'scale(' + panel.svgBuilderData.elements[i].scale + ')');
+                        g.setAttribute('transform', 'translate(' + panel.svgBuilderData.elements[i].x + ' ' + panel.svgBuilderData.elements[i].y + ') ' +
+                            'rotate(' + panel.svgBuilderData.elements[i].rotate + ' ' + panel.svgBuilderData.elements[i].rcenterx + ' ' + panel.svgBuilderData.elements[i].rcentery + ') ' +
+                            'scale(' + panel.svgBuilderData.elements[i].scale + ')');
                         svg.appendChild(g);
-                        $(g).html(svgFragment.documentElement.children); 
+                        $(g).html(svgFragment.documentElement.children);
                     }
                 )
                 panel.svg_data = svg.outerHTML;
