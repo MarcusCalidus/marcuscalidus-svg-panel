@@ -16,18 +16,19 @@
         },
         "links": [
             { "name": "Snap.svg", "url": "http://snapsvg.io/" },
-            { "name": "MIT License", "url": "https://github.com/grafana/piechart-panel/blob/master/LICENSE" },
+            { "name": "MIT License", "url": "https://github.com/MarcusCalidus/marcuscalidus-svg-panel/blob/master/LICENSE" },
             { "name": "Project", "url": "https://github.com/MarcusCalidus/marcuscalidus-svg-panel" }
         ],
         "screenshots": [
             { "name": "In Action", "path": "img/inAction.png" },
             { "name": "Event onInit", "path": "img/onInit.png" },
             { "name": "Event onHandleMetric", "path": "img/onHandleMetric.png" },
+            { "name": "SVG Builder", "path": "img/svgBuilder.png" },
             { "name": "SVG data", "path": "img/svgData.png" },
             { "name": "included Demos", "path": "img/demoButtons.png" }
         ],
-        "version": "0.1.0",
-        "updated": "2018-02-11"
+        "version": "0.1.1",
+        "updated": "2018-06-25"
     },
 
     "dependencies": {
