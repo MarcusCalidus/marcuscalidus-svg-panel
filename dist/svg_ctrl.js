@@ -3,13 +3,7 @@
 System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/time_series', './rendering', './demos', './node_modules/snapsvg/dist/snap.svg-min.js', './node_modules/brace/index.js', './node_modules/brace/ext/language_tools.js', './node_modules/brace/theme/tomorrow_night_bright.js', './node_modules/brace/mode/javascript.js', './node_modules/brace/mode/svg.js'], function (_export, _context) {
     "use strict";
 
-    var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, ace, _createClass, SVGCtrl;
-
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
+    var MetricsPanelCtrl, _, kbn, TimeSeries, rendering, SVGDemos, Snap, ace, _typeof, _createClass, GrafanaJSCompleter, SVGCtrl;
 
     function _possibleConstructorReturn(self, call) {
         if (!self) {
@@ -35,6 +29,12 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
     return {
         setters: [function (_appPluginsSdk) {
             MetricsPanelCtrl = _appPluginsSdk.MetricsPanelCtrl;
@@ -54,6 +54,12 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
             ace = _node_modulesBraceIndexJs.default;
         }, function (_node_modulesBraceExtLanguage_toolsJs) {}, function (_node_modulesBraceThemeTomorrow_night_brightJs) {}, function (_node_modulesBraceModeJavascriptJs) {}, function (_node_modulesBraceModeSvgJs) {}],
         execute: function () {
+            _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+                return typeof obj;
+            } : function (obj) {
+                return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+            };
+
             _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
@@ -70,6 +76,87 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
                 };
+            }();
+
+            GrafanaJSCompleter = function () {
+                function GrafanaJSCompleter($lang_tools, $control, $panel) {
+                    _classCallCheck(this, GrafanaJSCompleter);
+
+                    this.$lang_tools = $lang_tools;
+                    this.$control = $control;
+                    this.$panel = $panel;
+                }
+
+                _createClass(GrafanaJSCompleter, [{
+                    key: 'getCompletions',
+                    value: function getCompletions(editor, session, pos, prefix, callback) {
+                        var pos = editor.getCursorPosition();
+                        var line = editor.session.getLine(pos.row);
+
+                        prefix = line.substring(0, pos.column).match(/this\.\S*/g);
+                        if (prefix) {
+                            prefix = prefix[prefix.length - 1];
+                            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+                            var panelthis = this.$panel;
+                            var evalObj = eval('panel' + prefix);
+                            this.evaluatePrefix(evalObj, callback);
+                            return;
+                        }
+
+                        prefix = line.substring(0, pos.column).match(/ctrl\.\S*/g);
+                        if (prefix) {
+                            prefix = prefix[prefix.length - 1];
+                            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+                            var ctrl = this.$control;
+                            var evalObj = eval(prefix);
+                            this.evaluatePrefix(evalObj, callback);
+                            return;
+                        }
+
+                        prefix = line.substring(0, pos.column).match(/svgnode\.\S*/g);
+                        if (prefix) {
+                            prefix = prefix[prefix.length - 1];
+                            prefix = prefix.substring(0, prefix.lastIndexOf('.'));
+
+                            var svgnode = document.querySelector('.svg-object');
+                            var evalObj = eval(prefix);
+                            this.evaluatePrefix(evalObj, callback);
+                            return;
+                        }
+
+                        if (prefix == '') {
+                            var wordList = ['ctrl', 'svgnode', 'this'];
+
+                            callback(null, wordList.map(function (word) {
+                                return {
+                                    caption: word,
+                                    value: word,
+                                    meta: 'Grafana keyword'
+                                };
+                            }));
+                        }
+                    }
+                }, {
+                    key: 'evaluatePrefix',
+                    value: function evaluatePrefix(evalObj, callback) {
+                        var wordList = [];
+                        for (var key in evalObj) {
+                            wordList.push(key);
+                        }
+                        callback(null, wordList.map(function (word) {
+                            return {
+                                caption: word + ': ' + (Array.isArray(evalObj[word]) ? 'Array[' + (evalObj[word] || []).length + ']' : _typeof(evalObj[word])),
+                                value: word,
+                                meta: "Grafana keyword"
+                            };
+                        }));
+                        return;
+                    }
+                }]);
+
+                return GrafanaJSCompleter;
             }();
 
             _export('SVGCtrl', SVGCtrl = function (_MetricsPanelCtrl) {
@@ -134,6 +221,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                         this.prepareEditor();
                         this.unitFormats = kbn.getUnitFormats();
                         this.aceLangTools = ace.acequire("ace/ext/language_tools");
+
+                        this.aceLangTools.addCompleter(new GrafanaJSCompleter(this.aceLangTools, this, this.panel));
                     }
                 }, {
                     key: 'doShowAceJs',
