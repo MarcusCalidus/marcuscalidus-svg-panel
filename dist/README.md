@@ -63,7 +63,7 @@ onHandleMetric(ctrl: MetricsPanelCtrl, svgnode: HTMLElement)
 ```
 
 `ctrl` passes a grafana `MetricsPanelCtrl` object. This object contains all relevant data pertainig the current panel. 
-You may want to use the `ctrl.series` array property to access the current measurement data.
+You may want to use the `ctrl.series` or `ctrl.tables` array property to access the current measurement data.
 
 `svgnode` passes the HTMLElement of the svg object on the panel. You can access the elements of the svg itself by using the integrated Snap Library. ([http://snapsvg.io/](http://snapsvg.io/))
 
@@ -81,7 +81,7 @@ onHandleMetric(ctrl: MetricsPanelCtrl, svgnode: HTMLElement)
 ```
 
 `ctrl` passes a grafana `MetricsPanelCtrl` object. This object contains all relevant data pertainig the current panel. 
-You may want to use the `ctrl.series` array property to access the current measurement data.
+You may want to use the `ctrl.series` or `ctrl.tables` array property to access the current measurement data.
 
 `svgnode` passes the HTMLElement of the svg object on the panel. You can access the elements of the svg itself by using the integrated Snap Library. ([http://snapsvg.io/](http://snapsvg.io/))
 

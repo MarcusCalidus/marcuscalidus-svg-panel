@@ -328,7 +328,16 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 }, {
                     key: 'onDataReceived',
                     value: function onDataReceived(dataList) {
-                        this.series = dataList.map(this.seriesHandler.bind(this));
+
+                        this.tables = [];
+                        this.series = [];
+
+                        if (dataList.length > 0 && dataList[0].type === 'table') {
+                            this.tables = dataList.map(this.tableHandler.bind(this));
+                        } else {
+                            this.series = dataList.map(this.seriesHandler.bind(this));
+                        }
+
                         this.render();
                     }
                 }, {
@@ -346,6 +355,27 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
                         series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
                         return series;
+                    }
+                }, {
+                    key: 'tableHandler',
+                    value: function tableHandler(tableData) {
+
+                        var columnNames = tableData.columns.map(function (column) {
+                            return column.text;
+                        });
+
+                        var rows = tableData.rows.map(function (row) {
+                            var datapoint = {};
+
+                            row.forEach(function (value, columnIndex) {
+                                var key = columnNames[columnIndex];
+                                datapoint[key] = value;
+                            });
+
+                            return datapoint;
+                        });
+
+                        return { columnNames: columnNames, rows: rows };
                     }
                 }, {
                     key: 'getSeriesIdByAlias',
