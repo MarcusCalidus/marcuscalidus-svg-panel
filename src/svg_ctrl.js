@@ -239,7 +239,13 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     onDataReceived(dataList) {
-        this.series = dataList.map(this.seriesHandler.bind(this));
+		
+		if (dataList.length > 0 && dataList[0].type === 'table') {
+		  this.tables = dataList.map(this.tableHandler.bind(this));
+		} else {
+		  this.series = dataList.map(this.seriesHandler.bind(this));
+		}
+
         this.render();
     }
 
@@ -256,6 +262,24 @@ export class SVGCtrl extends MetricsPanelCtrl {
         series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
         return series;
     }
+	
+	tableHandler(tableData) {
+		
+		const columnNames = tableData.columns.map(column => column.text);
+
+		const rows = tableData.rows.map(row => {
+		  const datapoint = {};
+
+		  row.forEach((value, columnIndex) => {
+			const key = columnNames[columnIndex];
+			datapoint[key] = value;
+		  });
+
+		  return datapoint;
+		});
+
+		return { columnNames: columnNames, rows: rows };
+	}
 
     getSeriesIdByAlias(aliasName) {
         for (var i = 0; i < this.series.length; i++) {
