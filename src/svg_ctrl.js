@@ -240,6 +240,9 @@ export class SVGCtrl extends MetricsPanelCtrl {
 
     onDataReceived(dataList) {
 		
+		this.tables = [];
+		this.series = [];
+		
 		if (dataList.length > 0 && dataList[0].type === 'table') {
 		  this.tables = dataList.map(this.tableHandler.bind(this));
 		} else {
