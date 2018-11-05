@@ -93,6 +93,9 @@ s.select('#status')
 ![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onInit.png)
 
 # Changelog
+## 0.2.0
+- Implemented support for data in table format. Thanks to Lauri Saurus (https://github.com/saurla)
+
 ## 0.1.1
 - now includes JavaScript code completion for the objects this, ctrl and svgnode.
 
