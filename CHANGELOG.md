@@ -1,3 +1,6 @@
+# 0.2.0
+- Implemented support for data in table format. Thanks to Lauri Saurus (https://github.com/saurla)
+
 # 0.1.1
 - now includes JavaScript code completion for the objects this, ctrl and svgnode.
 
