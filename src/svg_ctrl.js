@@ -349,6 +349,15 @@ export class SVGCtrl extends MetricsPanelCtrl {
         return value;
     }
 
+    formatValueWithFormatter(value, formatter) {
+        var decimalInfo = this.getDecimalsForValue(value);
+        var formatFunc = kbn.valueFormats[formatter];
+        if (formatFunc) {
+            return formatFunc(value, decimalInfo.decimals, decimalInfo.scaledDecimals);
+        }
+        return value;
+    }
+
     link(scope, elem, attrs, ctrl) {
         rendering(scope, elem, attrs, ctrl);
     }
