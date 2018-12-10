@@ -449,6 +449,16 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                         return value;
                     }
                 }, {
+                    key: 'formatValueWithFormatter',
+                    value: function formatValueWithFormatter(value, formatter) {
+                        var decimalInfo = this.getDecimalsForValue(value);
+                        var formatFunc = kbn.valueFormats[formatter];
+                        if (formatFunc) {
+                            return formatFunc(value, decimalInfo.decimals, decimalInfo.scaledDecimals);
+                        }
+                        return value;
+                    }
+                }, {
                     key: 'link',
                     value: function link(scope, elem, attrs, ctrl) {
                         rendering(scope, elem, attrs, ctrl);
