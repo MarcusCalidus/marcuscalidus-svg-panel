@@ -63,7 +63,7 @@ onHandleMetric(ctrl: MetricsPanelCtrl, svgnode: HTMLElement)
 ```
 
 `ctrl` passes a grafana `MetricsPanelCtrl` object. This object contains all relevant data pertainig the current panel. 
-You may want to use the `ctrl.series` or `ctrl.tables` array property to access the current measurement data.
+You may want to use the `ctrl.data` array property to access the current measurement data.
 
 `svgnode` passes the HTMLElement of the svg object on the panel. You can access the elements of the svg itself by using the integrated Snap Library. ([http://snapsvg.io/](http://snapsvg.io/))
 
@@ -81,7 +81,7 @@ onHandleMetric(ctrl: MetricsPanelCtrl, svgnode: HTMLElement)
 ```
 
 `ctrl` passes a grafana `MetricsPanelCtrl` object. This object contains all relevant data pertainig the current panel. 
-You may want to use the `ctrl.series` or `ctrl.tables` array property to access the current measurement data.
+You may want to use the `ctrl.data` array property to access the current measurement data.
 
 `svgnode` passes the HTMLElement of the svg object on the panel. You can access the elements of the svg itself by using the integrated Snap Library. ([http://snapsvg.io/](http://snapsvg.io/))
 
@@ -93,6 +93,11 @@ s.select('#status')
 ![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onInit.png)
 
 # Changelog
+
+## 0.3.0
+- Implemented support for data in docs type. (e.g. Elasticsearch Raw Document)
+- The data passed to the panel is now stored in the `ctrl.data` property. The alias property `ctrl.series` should not be used anymore and is to be regarded deprecated. 
+ 
 ## 0.2.0
 - Implemented support for data in table format. Thanks to Lauri Saurus (https://github.com/saurla)
 
@@ -114,7 +119,7 @@ s.select('#status')
 ## 0.0.5
 * ace editor for code editing
 ## 0.0.4
-* panel now runs smoothly in IE11 (added neccessary polyfill)
+* panel now runs smoothly in IE11 (added necessary polyfill)
 ## 0.0.3
 * fixed bug with onInit function in Grafana 5
 * new method for injecting SVG via Snap svg library

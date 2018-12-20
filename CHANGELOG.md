@@ -1,4 +1,8 @@
-# 0.2.0
+# 0.3.0
+- Implemented support for data in docs type. (e.g. Elasticsearch Raw Document)
+- The data passed to the panel is now stored in the `ctrl.data` property. The alias property `ctrl.series` should not be used anymore and is to be regarded deprecated. 
+ 
+ # 0.2.0
 - Implemented support for data in table format. Thanks to Lauri Saurus (https://github.com/saurla)
 
 # 0.1.1
@@ -19,7 +23,7 @@
 # 0.0.5
 - ace editor for code and SVG editing
 ## 0.0.4
-- panel now runs smoothly in IE11 (added neccessary polyfill)
+- panel now runs smoothly in IE11 (added necessary polyfill)
 ## 0.0.3
 - fixed bug with onInit function in Grafana 5
 - new method for injecting SVG via Snap svg library

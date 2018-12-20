@@ -293,7 +293,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 }, {
                     key: 'onDataError',
                     value: function onDataError() {
-                        this.series = [];
+                        this.data = [];
                         this.render();
                     }
                 }, {
@@ -328,14 +328,16 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 }, {
                     key: 'onDataReceived',
                     value: function onDataReceived(dataList) {
-
-                        this.tables = [];
-                        this.series = [];
+                        this.data = [];
 
                         if (dataList.length > 0 && dataList[0].type === 'table') {
-                            this.tables = dataList.map(this.tableHandler.bind(this));
+                            this.data = dataList.map(this.tableHandler.bind(this));
+                            this.table = this.data; // table should be regarded as deprecated
+                        } else if (dataList.length > 0 && dataList[0].type === 'docs') {
+                            this.data = dataList.map(this.docsHandler.bind(this));
                         } else {
-                            this.series = dataList.map(this.seriesHandler.bind(this));
+                            this.data = dataList.map(this.seriesHandler.bind(this));
+                            this.series = this.data; // series should be regarded as deprectated
                         }
 
                         this.render();
@@ -355,6 +357,11 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
 
                         series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
                         return series;
+                    }
+                }, {
+                    key: 'docsHandler',
+                    value: function docsHandler(seriesData) {
+                        return seriesData;
                     }
                 }, {
                     key: 'tableHandler',
@@ -380,8 +387,8 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                 }, {
                     key: 'getSeriesIdByAlias',
                     value: function getSeriesIdByAlias(aliasName) {
-                        for (var i = 0; i < this.series.length; i++) {
-                            if (this.series[i].alias == aliasName) {
+                        for (var i = 0; i < this.data.length; i++) {
+                            if (this.data[i].alias == aliasName) {
                                 return i;
                             }
                         }
@@ -392,7 +399,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', 'app/core/ti
                     value: function getSeriesElementByAlias(aliasName) {
                         var i = this.getSeriesIdByAlias(aliasName);
                         if (i >= 0) {
-                            return this.series[i];
+                            return this.data[i];
                         }
                         return null;
                     }

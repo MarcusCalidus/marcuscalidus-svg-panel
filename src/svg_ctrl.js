@@ -1,10 +1,10 @@
-import { MetricsPanelCtrl } from 'app/plugins/sdk';
+import {MetricsPanelCtrl} from 'app/plugins/sdk';
 import _ from 'lodash';
 import kbn from 'app/core/utils/kbn';
 import TimeSeries from 'app/core/time_series';
 import rendering from './rendering';
-import { SVGDemos } from './demos';
-import { Snap } from './node_modules/snapsvg/dist/snap.svg-min.js';
+import {SVGDemos} from './demos';
+import {Snap} from './node_modules/snapsvg/dist/snap.svg-min.js';
 import ace from './node_modules/brace/index.js';
 import './node_modules/brace/ext/language_tools.js';
 import './node_modules/brace/theme/tomorrow_night_bright.js';
@@ -59,7 +59,7 @@ class GrafanaJSCompleter {
         if (prefix == '') {
             var wordList = ['ctrl', 'svgnode', 'this'];
 
-            callback(null, wordList.map(function(word) {
+            callback(null, wordList.map(function (word) {
                 return {
                     caption: word,
                     value: word,
@@ -74,7 +74,7 @@ class GrafanaJSCompleter {
         for (var key in evalObj) {
             wordList.push(key);
         }
-        callback(null, wordList.map(function(word) {
+        callback(null, wordList.map(function (word) {
             return {
                 caption: word + ': ' + (Array.isArray(evalObj[word]) ? 'Array[' + (evalObj[word] || []).length + ']' : typeof evalObj[word]),
                 value: word,
@@ -146,12 +146,12 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     doShowAceJs(nodeId) {
-        setTimeout(function() {
+        setTimeout(function () {
             if ($('#' + nodeId).length === 1) {
                 this.editors[nodeId] = ace.edit(nodeId);
                 $('#' + nodeId).attr('id', nodeId + '_initialized');
                 this.editors[nodeId].setValue(this.panel[nodeId], 1);
-                this.editors[nodeId].getSession().on('change', function() {
+                this.editors[nodeId].getSession().on('change', function () {
                     var val = this.editors[nodeId].getSession().getValue();
                     this.panel[nodeId] = val;
                     try {
@@ -175,12 +175,12 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     doShowAceSvg(nodeId) {
-        setTimeout(function() {
+        setTimeout(function () {
             if ($('#' + nodeId).length === 1) {
                 this.editors[nodeId] = ace.edit(nodeId);
                 $('#' + nodeId).attr('id', nodeId + '_initialized');
                 this.editors[nodeId].setValue(this.panel[nodeId], 1);
-                this.editors[nodeId].getSession().on('change', function() {
+                this.editors[nodeId].getSession().on('change', function () {
                     var val = this.editors[nodeId].getSession().getValue();
                     this.panel[nodeId] = val;
                     try {
@@ -209,7 +209,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     onDataError() {
-        this.series = [];
+        this.data = [];
         this.render();
     }
 
@@ -239,15 +239,17 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     onDataReceived(dataList) {
-		
-		this.tables = [];
-		this.series = [];
-		
-		if (dataList.length > 0 && dataList[0].type === 'table') {
-		  this.tables = dataList.map(this.tableHandler.bind(this));
-		} else {
-		  this.series = dataList.map(this.seriesHandler.bind(this));
-		}
+        this.data = [];
+
+        if (dataList.length > 0 && dataList[0].type === 'table') {
+            this.data = dataList.map(this.tableHandler.bind(this));
+            this.table = this.data; // table should be regarded as deprecated
+        } else if (dataList.length > 0 && dataList[0].type === 'docs') {
+            this.data = dataList.map(this.docsHandler.bind(this));
+        } else {
+            this.data = dataList.map(this.seriesHandler.bind(this));
+            this.series = this.data; // series should be regarded as deprectated
+        }
 
         this.render();
     }
@@ -257,7 +259,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     seriesHandler(seriesData) {
-        var series = new TimeSeries({
+        const series = new TimeSeries({
             datapoints: seriesData.datapoints,
             alias: seriesData.target
         });
@@ -265,28 +267,33 @@ export class SVGCtrl extends MetricsPanelCtrl {
         series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
         return series;
     }
-	
-	tableHandler(tableData) {
-		
-		const columnNames = tableData.columns.map(column => column.text);
 
-		const rows = tableData.rows.map(row => {
-		  const datapoint = {};
 
-		  row.forEach((value, columnIndex) => {
-			const key = columnNames[columnIndex];
-			datapoint[key] = value;
-		  });
+    docsHandler(seriesData) {
+        return seriesData;
+    }
 
-		  return datapoint;
-		});
+    tableHandler(tableData) {
 
-		return { columnNames: columnNames, rows: rows };
-	}
+        const columnNames = tableData.columns.map(column => column.text);
+
+        const rows = tableData.rows.map(row => {
+            const datapoint = {};
+
+            row.forEach((value, columnIndex) => {
+                const key = columnNames[columnIndex];
+                datapoint[key] = value;
+            });
+
+            return datapoint;
+        });
+
+        return {columnNames: columnNames, rows: rows};
+    }
 
     getSeriesIdByAlias(aliasName) {
-        for (var i = 0; i < this.series.length; i++) {
-            if (this.series[i].alias == aliasName) {
+        for (var i = 0; i < this.data.length; i++) {
+            if (this.data[i].alias == aliasName) {
                 return i;
             }
         }
@@ -296,14 +303,14 @@ export class SVGCtrl extends MetricsPanelCtrl {
     getSeriesElementByAlias(aliasName) {
         var i = this.getSeriesIdByAlias(aliasName);
         if (i >= 0) {
-            return this.series[i];
+            return this.data[i];
         }
         return null;
     }
 
     getDecimalsForValue(value) {
         if (_.isNumber(this.panel.decimals)) {
-            return { decimals: this.panel.decimals, scaledDecimals: null };
+            return {decimals: this.panel.decimals, scaledDecimals: null};
         }
 
         var delta = value / 2;
@@ -331,7 +338,9 @@ export class SVGCtrl extends MetricsPanelCtrl {
         size *= magn;
 
         // reduce starting decimals if not needed
-        if (Math.floor(value) === value) { dec = 0; }
+        if (Math.floor(value) === value) {
+            dec = 0;
+        }
 
         var result = {};
         result.decimals = Math.max(0, dec);
@@ -430,7 +439,7 @@ export class SVGCtrl extends MetricsPanelCtrl {
     }
 
     buildSVG() {
-        var all = function(array) {
+        var all = function (array) {
             var deferred = $.Deferred();
             var fulfilled = 0,
                 length = array.length;
@@ -439,8 +448,8 @@ export class SVGCtrl extends MetricsPanelCtrl {
             if (length === 0) {
                 deferred.resolve(results);
             } else {
-                array.forEach(function(promise, i) {
-                    $.when(promise()).then(function(value) {
+                array.forEach(function (promise, i) {
+                    $.when(promise()).then(function (value) {
                         results[i] = value;
                         fulfilled++;
                         if (fulfilled === length) {
