@@ -1,3 +1,6 @@
+# 0.3.1
+- Package update due to security vulnerabilities.
+
 # 0.3.0
 - Implemented support for data in docs type. (e.g. Elasticsearch Raw Document) Thanks to Zoltán Szabó (https://github.com/zoell)
 - The data passed to the panel is now stored in the `ctrl.data` property. The alias property `ctrl.series` should not be used anymore and is to be regarded deprecated. 
