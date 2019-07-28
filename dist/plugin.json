@@ -27,7 +27,7 @@
             { "name": "SVG data", "path": "img/svgData.png" },
             { "name": "included Demos", "path": "img/demoButtons.png" }
         ],
-        "version": "0.3.0",
+        "version": "0.3.1",
         "updated": "2018-30-12"
     },
 

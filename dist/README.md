@@ -93,6 +93,8 @@ s.select('#status')
 ![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onInit.png)
 
 # Changelog
+## 0.3.1
+- Package update due to security vulnerabilities.
 
 ## 0.3.0
 - Implemented support for data in docs type. (e.g. Elasticsearch Raw Document) Thanks to Zoltán Szabó (https://github.com/zoell)
