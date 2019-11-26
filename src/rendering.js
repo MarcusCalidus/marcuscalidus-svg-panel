@@ -47,16 +47,11 @@ export default function link(scope, elem, attrs, ctrl) {
   } 
 
   function resizePlotCanvas() {
-    var width = elem.width();
-    var height = elem.height();
-
-    var size = Math.min(width, height);
-
     var plotCss = {
       top: '10px',
       margin: 'auto',
       position: 'relative',
-      height: (size) + 'px'
+      height: elem.height() + 'px'
     };
     plotCanvas.css(plotCss);
   }
