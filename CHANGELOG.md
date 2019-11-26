@@ -1,3 +1,6 @@
+# 0.3.3
+- fixed rendering of SVG which are higher than wide
+
 # 0.3.1
 - Package update due to security vulnerabilities.
 
