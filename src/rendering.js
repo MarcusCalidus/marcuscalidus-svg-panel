@@ -46,7 +46,7 @@ export default function link(scope, elem, attrs, ctrl) {
     parentSVG.node.append(childSVG.node);
   } 
 
-  function resizePlotCanvas() {
+  function resizePlotCanvas() {     
     var plotCss = {
       top: '10px',
       margin: 'auto',

@@ -93,6 +93,9 @@ s.select('#status')
 ![Screenshot](https://raw.githubusercontent.com/MarcusCalidus/marcuscalidus-svg-panel/master/dist/img/onInit.png)
 
 # Changelog
+## 0.3.4
+- fixed rendering of SVG that were not able to resize to small heights
+
 ## 0.3.3
 - fixed rendering of SVG which are higher than wide
 
