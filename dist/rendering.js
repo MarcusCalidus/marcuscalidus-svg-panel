@@ -24,8 +24,8 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie', './node_m
           height = parseInt(height.replace('px', ''), 10);
         }
 
-        height -= 5; // padding
-        height -= panel.title ? 24 : 9; // subtract panel title bar
+        // height -= 5; // padding
+        // height -= panel.title ? 12 : 5; // subtract panel title bar
 
         elem.css('height', height + 'px');
 
@@ -50,7 +50,6 @@ System.register(['lodash', 'jquery', 'jquery.flot', 'jquery.flot.pie', './node_m
 
     function resizePlotCanvas() {
       var plotCss = {
-        top: '10px',
         margin: 'auto',
         position: 'relative',
         height: elem.height() + 'px'

@@ -23,8 +23,8 @@ export default function link(scope, elem, attrs, ctrl) {
         height = parseInt(height.replace('px', ''), 10);
       }
 
-      height -= 5; // padding
-      height -= panel.title ? 24 : 9; // subtract panel title bar
+     // height -= 5; // padding
+     // height -= panel.title ? 12 : 5; // subtract panel title bar
 
       elem.css('height', height + 'px');
 
@@ -48,7 +48,6 @@ export default function link(scope, elem, attrs, ctrl) {
 
   function resizePlotCanvas() {     
     var plotCss = {
-      top: '10px',
       margin: 'auto',
       position: 'relative',
       height: elem.height() + 'px'
