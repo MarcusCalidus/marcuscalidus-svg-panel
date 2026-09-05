@@ -2,7 +2,6 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.loadNpmTasks('grunt-execute');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.initConfig({
@@ -58,8 +57,10 @@ module.exports = function(grunt) {
         babel: {
             options: {
                 sourceMap: true,
-                presets: ["es2015"],
-                plugins: ['transform-es2015-modules-systemjs', "transform-es2015-for-of"],
+                // Babel 7 equivalents of the former es2015 preset and its
+                // systemjs / for-of transforms (for-of is part of preset-env)
+                presets: [['@babel/preset-env', {modules: false}]],
+                plugins: ['@babel/plugin-transform-modules-systemjs'],
             },
             dist: {
                 files: [{
